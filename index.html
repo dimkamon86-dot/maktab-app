@@ -15,12 +15,15 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); margin-bottom: 15px; }
         input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-top: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
-        input:focus, textarea:focus { border-color: #003366; }
         .teacher-item { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; padding: 12px 0; }
         .teacher-avatar { width: 45px; height: 45px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; flex-shrink: 0; }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000; }
+        
+        /* ПАСТКИ МЕНЮ СТИЛИ */
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .nav-item { text-align: center; font-size: 10px; color: #666; cursor: pointer; flex: 1; transition: 0.3s; }
-        .nav-active { color: #003366; font-weight: bold; transform: scale(1.1); }
+        .nav-active { color: #003366; font-weight: bold; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
+
         .btn-send { background: #28a745; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; margin-top: 15px; font-weight: bold; font-size: 16px; cursor: pointer; }
         .thanks-card { border-left: 5px solid #d4af37; background: #fffdf5; font-style: italic; }
     </style>
@@ -28,7 +31,7 @@
 <body>
 
     <div class="header">
-        <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo" alt="Logo">
+        <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo">
         <h4 style="margin:5px 0 0 0">Abu Ali ibn Sino Jizzax</h4>
     </div>
 
@@ -38,8 +41,8 @@
             <input type="text" id="studentSearch" placeholder="Ўқувчи исми (Лотин/Крилл)..." onkeyup="searchStudent()">
             <div id="studentCard" class="card" style="display:none; margin-top:15px;">
                 <h3 id="sName" style="margin:0; color:#003366"></h3>
-                <p id="sReport" style="font-size:14px; color:#444; line-height: 1.4;"></p>
-                <div style="width:100%; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; margin-top: 10px;">
+                <p id="sReport" style="font-size:14px; color:#444"></p>
+                <div style="width:100%; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden;">
                     <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
@@ -65,3 +68,56 @@
                 </div>
             </div>
         </div>
+
+        <div id="feedback" class="section">
+            <h3 style="color:#003366">Маъмуриятга мурожаат</h3>
+            <div class="card">
+                <input type="text" id="parentName" placeholder="Исмингиз">
+                <textarea id="parentMsg" rows="4" placeholder="Мурожаат матнини ёзинг..."></textarea>
+                <button class="btn-send" onclick="sendToBot()">ЮБОРИШ</button>
+            </div>
+        </div>
+
+        <div id="thanks" class="section">
+            <h3 style="color:#003366">Миннатдорчиликлар</h3>
+            <div class="card thanks-card">
+                "АИ технологияларнинг мактабда қўлланилиши фарзандларимизнинг дунёқарашини кенгайтирмоқда. Раҳмат!"
+                <p style="text-align:right; margin:5px 0 0 0; color:#003366"><b>— Бахтиёр ака</b></p>
+            </div>
+            <div class="card thanks-card">
+                "Ибн Сино мактаби — келажак макони. Барча устозларга соғлик тилайман."
+                <p style="text-align:right; margin:5px 0 0 0; color:#003366"><b>— Шохида опа</b></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-item nav-active" onclick="showSection('home', this)">
+            <span class="nav-icon">🏠</span>Асосий
+        </div>
+        <div class="nav-item" onclick="showSection('teachers', this)">
+            <span class="nav-icon">👨‍🏫</span>Устозлар
+        </div>
+        <div class="nav-item" onclick="showSection('feedback', this)">
+            <span class="nav-icon">✉️</span>Мурожаат
+        </div>
+        <div class="nav-item" onclick="showSection('thanks', this)">
+            <span class="nav-icon">❤️</span>Раҳматлар
+        </div>
+    </div>
+
+    <script>
+        const students = [
+            { 
+                name: "Alisher Sobirov", 
+                nameKiril: "Алишер Собиров", 
+                report: "Математикадан аъло баҳо олди!", 
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            }
+        ];
+
+        function searchStudent() {
+            let input = document.getElementById('studentSearch').value.toLowerCase();
+            let card = document.getElementById('studentCard');
+            let welcome = document.getElementById('welcome');
+            let result = students.find(s => s.name.toLowerCase().includes(
