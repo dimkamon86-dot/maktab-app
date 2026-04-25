@@ -3,91 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ibn Sino Jizzax - Smart System</title>
+    <title>Ibn Sino Jizzax</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root { --blue: #003366; --gold: #d4af37; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 100px; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 90px; }
         
-        .header { background: var(--blue); color: white; padding: 25px 15px; text-align: center; border-bottom: 5px solid var(--gold); border-radius: 0 0 30px 30px; }
-        .school-logo { width: 75px; height: 75px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
+        /* Header */
+        .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid var(--gold); border-radius: 0 0 25px 25px; }
+        .school-logo { width: 65px; height: 65px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
 
         .container { padding: 15px; }
         .section { display: none; }
-        .active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .card { background: white; border-radius: 20px; padding: 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
-        .card-title { color: var(--blue); margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px; font-weight: bold; }
+        /* Card styles */
+        .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
+        .card-title { color: var(--blue); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px; font-size: 16px; }
         
-        .list-btn { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 10px; }
-        .t-icon { width: 45px; height: 45px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        /* Buttons */
+        .list-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
+        .t-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 15% auto; padding: 25px; border-radius: 30px; width: 85%; text-align: center; position: relative; max-height: 80vh; overflow-y: auto; }
+        .modal-content { background: white; margin: 15% auto; padding: 20px; border-radius: 25px; width: 85%; text-align: center; position: relative; max-height: 75vh; overflow-y: auto; }
 
-        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid #ddd; z-index: 10000; }
+        /* Navigation */
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 0 20px 0; border-top: 1px solid #ddd; z-index: 10000; box-shadow: 0 -3px 10px rgba(0,0,0,0.05); }
         .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 10px; cursor: pointer; }
         .nav-active { color: var(--blue); font-weight: bold; }
-        .nav-icon { font-size: 22px; display: block; margin-bottom: 3px; }
+        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
 
-        .soc-btn { display: block; width: 100%; padding: 12px; border-radius: 12px; text-decoration: none; color: white; font-weight: bold; text-align: center; margin-bottom: 10px; }
+        /* Social & AI buttons */
+        .btn-action { display: block; width: 100%; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; text-align: center; margin-bottom: 8px; font-size: 14px; border: none; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo">
-        <h3 style="margin:10px 0 0 0;">IBN SINO JIZZAX</h3>
+        <h4 style="margin:5px 0 0 0;">IBN SINO JIZZAX</h4>
     </div>
 
     <div class="container">
-        <div id="home" class="section active">
+        <div id="sec-home" class="section active">
             <div class="card">
                 <h4 class="card-title"><span>🔍</span> O‘quvchi Tahlili</h4>
-                <input type="text" id="sInput" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" placeholder="Ismni yozing (Mas: Alisher)..." oninput="searchS()">
-                <div id="sResult" style="display:none; margin-top:15px; background:#eef7ff; padding:15px; border-radius:12px;">
-                    <b id="sn"></b>
-                    <p id="sa" style="font-size:14px; margin:10px 0;"></p>
+                <input type="text" id="sInput" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd; box-sizing: border-box;" placeholder="Ismni yozing..." oninput="searchS()">
+                <div id="sResult" style="display:none; margin-top:12px; background:#eef7ff; padding:12px; border-radius:10px;">
+                    <b id="sn" style="color:var(--blue);"></b>
+                    <p id="sa" style="font-size:13px; margin:8px 0; color:#333;"></p>
                 </div>
             </div>
             <div class="card">
                 <h4 class="card-title"><span>📰</span> Maktab Yangiliklari</h4>
-                <p style="font-size:14px; color:#444;">• Smart maktab tizimi ishga tushirildi.<br>• Zakovat turniri jadvali e'lon qilindi.</p>
+                <div style="font-size:13px; color:#444;">
+                    <p>• <b>25-aprel:</b> Smart tizim test rejimida ishga tushdi.</p>
+                    <p>• <b>Zakovat:</b> Keyingi o'yin juma kuni 15:00 da.</p>
+                </div>
             </div>
         </div>
 
-        <div id="staff" class="section">
+        <div id="sec-staff" class="section">
             <div class="card">
-                <h4 class="card-title"><span>👨‍🏫</span> Rahbariyat va Ustozlar</h4>
+                <h4 class="card-title"><span>👨‍🏫</span> Ustozlar va Rahbariyat</h4>
                 <div id="staff-list"></div>
             </div>
         </div>
 
-        <div id="edu" class="section">
+        <div id="sec-edu" class="section">
             <div class="card">
                 <h4 class="card-title"><span>📚</span> Imtihon va Testlar</h4>
-                <div class="list-btn"><span>Biologiya (Test)</span> <span>📝</span></div>
-                <div class="list-btn"><span>Matematika (Test)</span> <span>📝</span></div>
-                <div class="list-btn" style="background:var(--blue); color:white;"><span>Zakovat Tanlovi</span> <span>🏆</span></div>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Biologiya (Test)</span> <span>📝</span></div>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Matematika (Imtihon)</span> <span>📝</span></div>
+            </div>
+            <div class="card">
+                <h4 class="card-title"><span>🏆</span> Zakovat Tanlovi</h4>
+                <p style="font-size:13px;">O'quvchilar reytingi va savollar bo'limi.</p>
+                <button class="btn-action" style="background:var(--blue);">Reytingni ko'rish</button>
             </div>
         </div>
 
-        <div id="extra" class="section">
+        <div id="sec-extra" class="section">
             <div class="card">
                 <h4 class="card-title"><span>🤖</span> AI Yordamchi</h4>
-                <p style="font-size:13px; color:#666;">Maktab savollariga AI orqali javob oling.</p>
-                <button onclick="alert('AI tizimi sozlanmoqda...')" style="width:100%; padding:10px; border-radius:10px; border:1.5px solid var(--blue); color:var(--blue); background:none; font-weight:bold;">Suhbatni boshlash</button>
+                <p style="font-size:13px; color:#666;">Darslarda qiynalyapsizmi? AI dan so'rang.</p>
+                <button onclick="alert('AI bog\'lanmoqda...')" class="btn-action" style="background:none; border:1px solid var(--blue); color:var(--blue);">Suhbatni boshlash</button>
             </div>
             <div class="card">
                 <h4 class="card-title"><span>🌐</span> Ijtimoiy Tarmoqlar</h4>
-                <a href="https://t.me/K_Dilmurod" class="soc-btn" style="background:#0088cc;">Telegram Kanal</a>
-                <a href="#" class="soc-btn" style="background:#e4405f;">Instagram</a>
+                <a href="https://t.me/K_Dilmurod" class="btn-action" style="background:#0088cc;">Telegram Kanal</a>
+                <a href="tel:+998997712288" class="btn-action" style="background:#28a745;">Bog'lanish</a>
             </div>
         </div>
     </div>
 
     <div id="tModal" class="modal">
         <div class="modal-content">
-            <span style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;" onclick="closeM()">&times;</span>
-            <img src="photo_2026-02-13_08-43-5
+            <span style="position:absolute; right:20px; top:10px; font-size:25px; cursor:pointer;" onclick="closeM()">&times;</span>
+            <img src="photo_2026-02-13_08-43-51.jpg" style="width:80px; border-radius:50%; border:2px solid var(--gold); margin-bottom:10px;">
+            <h3 id="mn" style="color:var(--blue); margin:0; font-size:18px;"></h3>
+            <p id="mp" style="font-weight:bold; color:var(--gold); margin:5px 0; font-size:13px;"></p>
+            <div id="minfo" style="font-size:12px; color:#444; text-align:left; line-height:1.5; border-top:1px solid #eee; padding-top:10px;"></div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-item nav-active" id="n1" onclick="st('sec-home', 'n1')"><span class="nav-icon">🏠</span>Asosiy</div>
+        <div class="nav-item" id="n2" onclick="st('sec-staff', 'n2')"><span class="nav-icon">👨‍🏫</span>Ustozlar</div>
+        <div class="nav-item" id="n3" onclick="st('sec-edu', 'n3')"><span class="nav-icon">📚</span>Ta'lim</div>
+        <div class="nav-item" id="n4" onclick="st('sec-extra', 'n4')"><span class="nav-icon">🤖</span>AI & Aloqa</div>
+    </div>
+
+    <script>
+        // FAQAT SIZ BERGAN RO'YXAT (Lotincha)
+        const staffData = [
+            { n: "Karimqulov Dilmurod Qurbonboyevich", p: "Maktab Direktori", i: "Tug'ilgan: 19.12.1986. Toifasi: Oliy. Ish staji: 20 yil." },
+            { n: "Jo'rayeva Feruza Ismatovna", p: "O'TIBDO'", i: "Tug'ilgan: 1975. Toifasi: Ikkinchi. Ish staji: 31 yil." },
+            { n: "Ubaydullayev Sardorbek Safarbek o'g'li", p: "Direktor o'rinbosari", i: "Tug'ilgan: 1994. Toifasi: Oliy. Ish staji: 6 yil." },
+            { n: "Ahmadov Ijod Narziqulovich", p: "Targ'ibotchi", i: "Mutaxassisligi: Huquq va ma'naviyat. Toifasi: Oliy. Ish staji: 16 yil." },
+            { n: "Abdunazarova Gulnoza Isomiddinovna", p: "O'qituvchi", i: "Mutaxassisligi: Ingliz tili. Toifasi: Birinchi. Ish staji: 14 yil." },
+            { n: "Allayarova Ra'no Musurmonovna", p: "O'qituvchi", i: "Mutaxassisligi: Ona tili. Toifasi: Birinchi. Ish staji: 24 yil." },
+            { n: "Qurbonov Dilmurod Sayfullayevich", p: "O'qituvchi", i: "Mutaxassisligi: Jismoniy madaniyat. Toifasi: Ikkinchi. Ish staji: 23 yil." },
+            { n: "Turg'unov Alisher Eliboy o'g'li", p: "O'qituvchi", i: "Mutaxassisligi: Geografiya. Toifasi: Oliy. Ish staji: 11 yil." },
+            { n: "Tursunqulova Nargiza", p: "Kutubxonachi", i: "Tug'ilgan: 1977. Ish staji: 27 yil." }
+        ];
+
+        // O'quvchi namuna
+        const students = [ { k: "alisher", n: "Alisher Sobirov", a: "📊 1-Chorak: 4.8 | 2-Chorak: 5.0. <br>Yutuq: Fan olimpiadasi g'olibi." } ];
+
+        function renderStaff() {
+            const list = document.getElementById('staff-list');
+            list.innerHTML = '';
+            staffData.forEach(s => {
+                const item = document.createElement('div');
+                item.className = 'list-btn';
+                item.onclick = () => openM(s.n, s.p, s.i);
+                item.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div class="t-icon">${s.n[0]}</div><div style="text-align:left;"><b>${s.n.split(' ')[0]} ${s.n.split(' ')[1]}</b><br><small>${s.p}</small></div></div><span>➡️</span>`;
+                list.appendChild(item);
+            });
+        }
+
+        function searchS() {
+            let v = document.getElementById('sInput').value.toLowerCase().trim();
+            let res = students.find(s => s.k.includes(v));
+            if(v.length > 0 && res) {
+                document.getElementById('sResult').style.display = 'block';
+                document.getElementById('sn').innerText = res.n;
+                document.getElementById('sa').innerHTML = res.a;
+            } else { document.getElementById('sResult').style.display = 'none'; }
+        }
+
+        function st(sId, nId) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById(sId).style.display = 'block';
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('nav-active'));
+            document.getElementById(nId).classList.add('nav-active');
+            window.scrollTo(0,0);
+        }
+
+        function openM(n, p, i) {
+            document.getElementById('mn').innerText = n;
+            document.getElementById('mp').innerText = p;
+            document.getElementById('minfo').innerHTML = i;
+            document.getElementById('tModal').style.display = 'block';
+        }
+
+        function closeM() { document.getElementById('tModal').style.display = 'none'; }
+
+        renderStaff();
+        window.Telegram.WebApp.expand();
+    </script>
+</body>
+</html>
