@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ibn Sino Jizzax - Ota-onalar platformasi</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; margin: 0; padding: 15px; color: #333; }
+.header { background: #003366; color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; }
+.logo { width: 80px; height: 80px; background: white; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #003366; }
+.card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px; }
+.student-info { display: flex; align-items: center; gap: 15px; }
+.student-photo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #003366; }
+.video-container { width: 100%; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+.btn { display: block; width: 100%; padding: 12px; background: #003366; color: white; text-align: center; text-decoration: none; border-radius: 10px; font-weight: bold; border: none; cursor: pointer; }
+.badge { background: #e7f3ff; color: #003366; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="header">
+<div class="logo">IBN SINO</div>
+<h3>Jizzax Filiali</h3>
+<p>Ota-onalar uchun raqamli platforma</p>
+</div>
+
+<div class="card">
+<div class="student-info">
+<img src="https://via.placeholder.com/60" class="student-photo" alt="Rasm">
+<div>
+<div class="badge">9-A sinf</div>
+<h4 style="margin: 5px 0;">Alisher Sobirov</h4>
+</div>
+</div>
+<hr style="border: 0.5px solid #eee;">
+<p><b>Choraklik yutug'i:</b> Matematika olimpiadasi viloyat bosqichi 1-o'rin.</p>
+
+<div class="video-container">
+<iframe width="100%" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+</div>
+<p style="font-size: 12px; color: #666;">AI-Ibn Sino hisoboti</p>
+</div>
+
+<button class="btn" onclick="tg.close()">Yopish</button>
+
+<script>
+let tg = window.Telegram.WebApp;
+tg.expand(); // Иловани тўлиқ экранда очиш
+</script>
+</body>
+</html>
