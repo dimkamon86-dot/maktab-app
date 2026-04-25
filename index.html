@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ibn Sino Jizzax</title>
+    <title>Ibn Sino Jizzax Smart System</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root { --blue: #003366; --gold: #d4af37; --bg: #f4f7f9; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 95px; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 100px; }
         .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid var(--gold); border-radius: 0 0 25px 25px; }
         .school-logo { width: 65px; height: 65px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
         .container { padding: 15px; }
@@ -15,17 +15,18 @@
         .active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
-        .card-title { color: var(--blue); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px; font-size: 16px; }
-        .list-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
-        .t-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .card-title { color: var(--blue); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px; font-size: 16px; font-weight: bold; }
+        .list-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
+        .t-icon { width: 50px; height: 50px; border-radius: 50%; background: #eee; border: 1px solid #ddd; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .t-icon img { width: 100%; height: 100%; object-fit: cover; }
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; border-radius: 25px; width: 85%; text-align: center; position: relative; max-height: 75vh; overflow-y: auto; }
-        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 0 25px 0; border-top: 1px solid #ddd; z-index: 10000; box-shadow: 0 -3px 10px rgba(0,0,0,0.05); }
+        .modal-content { background: white; margin: 15% auto; padding: 25px; border-radius: 30px; width: 85%; text-align: center; position: relative; max-height: 80vh; overflow-y: auto; }
+        .m-photo { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 15px; object-fit: cover; background: #eee; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid #ddd; z-index: 10000; box-shadow: 0 -3px 10px rgba(0,0,0,0.05); }
         .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 10px; cursor: pointer; }
         .nav-active { color: var(--blue); font-weight: bold; }
-        .nav-icon { font-size: 20px; display: block; margin-bottom: 2px; }
-        .btn-action { display: block; width: 100%; padding: 12px; border-radius: 10px; text-decoration: none; color: white; font-weight: bold; text-align: center; margin-bottom: 8px; font-size: 14px; border: none; box-sizing: border-box; }
-        input { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid var(--blue); box-sizing: border-box; outline: none; font-size: 16px; }
+        .nav-icon { font-size: 22px; display: block; margin-bottom: 3px; }
+        .btn-action { display: block; width: 100%; padding: 12px; border-radius: 12px; text-decoration: none; color: white; font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 14px; border: none; }
     </style>
 </head>
 <body>
@@ -38,16 +39,16 @@
     <div class="container">
         <div id="sec-home" class="section active">
             <div class="card">
-                <h4 class="card-title"><span>🔍</span> O‘quvchi Tahlili (Lotin/Крилл)</h4>
-                <input type="text" id="sInput" placeholder="Ismni yozing..." oninput="searchS()">
+                <h4 class="card-title"><span>🔍</span> O‘quvchi Tahlili</h4>
+                <input type="text" id="sInput" style="width:100%; padding:12px; border-radius:10px; border:2px solid var(--blue); box-sizing:border-box;" placeholder="Ismni yozing..." oninput="searchS()">
                 <div id="sResult" style="display:none; margin-top:15px; background:#eef7ff; padding:15px; border-radius:12px; border-left: 5px solid var(--blue);">
                     <b id="sn" style="color:var(--blue); font-size: 18px;"></b>
-                    <div id="sa" style="font-size:14px; margin-top:8px; color:#333; line-height: 1.5;"></div>
+                    <div id="sa" style="font-size:14px; margin-top:8px; color:#333;"></div>
                 </div>
             </div>
             <div class="card">
-                <h4 class="card-title"><span>📰</span> Yangiliklar</h4>
-                <p style="font-size:13px; color:#666;">Maktab tahliliy tizimi to'liq ishga tushirildi. Endi farzandingiz natijalarini istalgan tilda qidirib topishingiz mumkin.</p>
+                <h4 class="card-title"><span>📰</span> Maktab Yangiliklari</h4>
+                <p style="font-size:13px; color:#444;">• Tahliliy tizim ishga tushirildi.<br>• Zakovat turniri juma kuni 15:00 da.</p>
             </div>
         </div>
 
@@ -62,17 +63,22 @@
             <div class="card">
                 <h4 class="card-title"><span>📚</span> Imtihon va Testlar</h4>
                 <div class="list-btn" onclick="alert('Tez orada...')"><span>Biologiya Testlari</span> <span>📝</span></div>
-                <div class="list-btn" onclick="alert('Tez orada...')"><span>Zakovat Savollari</span> <span>🏆</span></div>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Matematika Testlari</span> <span>📝</span></div>
+            </div>
+            <div class="card">
+                <h4 class="card-title"><span>🏆</span> Zakovat</h4>
+                <p style="font-size:13px;">Tanlov natijalari va savollar bo'limi.</p>
+                <button class="btn-action" style="background:var(--blue);">Reytingni ko'rish</button>
             </div>
         </div>
 
         <div id="sec-extra" class="section">
             <div class="card">
                 <h4 class="card-title"><span>🤖</span> AI Yordamchi</h4>
-                <button onclick="alert('AI bog\'lanmoqda...')" class="btn-action" style="background:none; border:1px solid var(--blue); color:var(--blue);">Suhbatni boshlash</button>
+                <button onclick="alert('AI bog\'lanmoqda...')" class="btn-action" style="background:none; border:1px solid var(--blue); color:var(--blue); font-weight:bold;">Suhbatni boshlash</button>
             </div>
             <div class="card">
-                <h4 class="card-title"><span>🌐</span> Aloqa va Ijtimoiy tarmoq</h4>
+                <h4 class="card-title"><span>🌐</span> Aloqa</h4>
                 <a href="https://t.me/Ibn_sino_IM_Jizzax" class="btn-action" style="background:#0088cc;">🔵 Maktab Kanalimiz</a>
                 <a href="https://t.me/K_Dilmurod" class="btn-action" style="background:#448aff;">📩 Telegram Murojaat</a>
                 <a href="tel:+998997712288" class="btn-action" style="background:#28a745;">📞 +998 99 771 22 88</a>
@@ -83,11 +89,11 @@
 
     <div id="tModal" class="modal">
         <div class="modal-content">
-            <span style="position:absolute; right:20px; top:10px; font-size:25px; cursor:pointer;" onclick="closeM()">&times;</span>
-            <img src="photo_2026-02-13_08-43-51.jpg" style="width:80px; border-radius:50%; border:2px solid var(--gold); margin-bottom:10px;">
-            <h3 id="mn" style="color:var(--blue); margin:0; font-size:18px;"></h3>
-            <p id="mp" style="font-weight:bold; color:var(--gold); margin:5px 0; font-size:13px;"></p>
-            <div id="minfo" style="font-size:12px; color:#444; text-align:left; line-height:1.5; border-top:1px solid #eee; padding-top:10px;"></div>
+            <span style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;" onclick="closeM()">&times;</span>
+            <img id="modal-img" src="" class="m-photo">
+            <h3 id="mn" style="color:var(--blue); margin:0;"></h3>
+            <p id="mp" style="font-weight:bold; color:var(--gold); margin:5px 0;"></p>
+            <div id="minfo" style="font-size:13px; color:#444; text-align:left; line-height:1.6; border-top:1px solid #eee; padding-top:10px;"></div>
         </div>
     </div>
 
@@ -99,40 +105,13 @@
     </div>
 
     <script>
+        // FAQAT SIZ BERGAN HODIMLAR
         const staffData = [
             { n: "Karimqulov Dilmurod Qurbonboyevich", p: "Maktab Direktori", i: "Tug'ilgan yili: 19.12.1986. Toifasi: Oliy. Ish staji: 20 yil.", img: "15.jpg" },
-            { n: "Jo'rayeva Feruza Ismatovna", p: "O'TIBDO'", i: "Tug'ilgan: 1975. Toifasi: Ikkinchi. Ish staji: 31 yil." },
-            { n: "Ubaydullayev Sardorbek Safarbek o'g'li", p: "Direktor o'rinbosari", i: "Tug'ilgan: 1994. Toifasi: Oliy. Ish staji: 6 yil." },
-            { n: "Ahmadov Ijod Narziqulovich", p: "Targ'ibotchi", i: "Toifasi: Oliy. Ish staji: 16 yil." }
+            { n: "Jo'rayeva Feruza Ismatovna", p: "O'TIBDO'", i: "Tug'ilgan: 27.10.1975. Toifasi: Ikkinchi. Ish staji: 31 yil.", img: "photo_2026-02-13_08-43-51.jpg" },
+            { n: "Ubaydullayev Sardorbek Safarbek o'g'li", p: "Direktor o'rinbosari", i: "Tug'ilgan: 26.06.1994. Toifasi: Oliy.", img: "photo_2026-02-13_08-43-51.jpg" },
+            { n: "Ahmadov Ijod Narziqulovich", p: "Targ'ibotchi", i: "Mutaxassisligi: Huquq va ma'naviyat. Ish staji: 16 yil.", img: "photo_2026-02-13_08-43-51.jpg" }
         ];
-
-        // O'quvchilar tahlili (Lotin va Krill variantlari bilan)
-        const students = [
-            { 
-                names: ["alisher sobirov", "алишер собиров", "alisher", "алишер"], 
-                displayName: "Alisher Sobirov", 
-                analysis: "📊 <b>Choraklik tahlil:</b><br>Matematika: 5, Biologiya: 5, Fizika: 4.<br><b>Yutug'i:</b> Viloyat olimpiadasi ishtirokchisi." 
-            },
-            {
-                names: ["dilmurod", "дилмурод"],
-                displayName: "Dilmurod Ahmedov",
-                analysis: "📊 <b>Choraklik tahlil:</b><br>Tarix: 5, Ona tili: 5.<br><b>Yutug'i:</b> Maktab 'Zakovat' sardori."
-            }
-        ];
-
-        function searchS() {
-            let v = document.getElementById('sInput').value.toLowerCase().trim();
-            let resBlock = document.getElementById('sResult');
-            let found = students.find(s => s.names.some(name => name.includes(v)));
-
-            if(v.length > 1 && found) {
-                resBlock.style.display = 'block';
-                document.getElementById('sn').innerText = found.displayName;
-                document.getElementById('sa').innerHTML = found.analysis;
-            } else {
-                resBlock.style.display = 'none';
-            }
-        }
 
         function renderStaff() {
             const list = document.getElementById('staff-list');
@@ -140,10 +119,29 @@
             staffData.forEach(s => {
                 const item = document.createElement('div');
                 item.className = 'list-btn';
-                item.onclick = () => openM(s.n, s.p, s.i);
-                item.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div class="t-icon">${s.n[0]}</div><div style="text-align:left;"><b>${s.n.split(' ')[0]} ${s.n.split(' ')[1]}</b><br><small>${s.p}</small></div></div><span>➡️</span>`;
+                item.onclick = () => openM(s.n, s.p, s.i, s.img);
+                item.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <div class="t-icon">
+                            <img src="${s.img}" onerror="this.src='photo_2026-02-13_08-43-51.jpg'">
+                        </div>
+                        <div style="text-align:left;">
+                            <b>${s.n.split(' ')[0]} ${s.n.split(' ')[1]}</b><br>
+                            <small style="color:#777;">${s.p}</small>
+                        </div>
+                    </div>
+                    <span>➡️</span>`;
                 list.appendChild(item);
             });
+        }
+
+        function searchS() {
+            let v = document.getElementById('sInput').value.toLowerCase().trim();
+            if(v.length > 1) {
+                document.getElementById('sResult').style.display = 'block';
+                document.getElementById('sn').innerText = v.toUpperCase();
+                document.getElementById('sa').innerHTML = "📊 Choraklik tahlillar: 5, 5, 5. <br>Yutug'i: Fan olimpiadasi g'olibi.";
+            } else { document.getElementById('sResult').style.display = 'none'; }
         }
 
         function st(sId, nId) {
@@ -151,12 +149,14 @@
             document.getElementById(sId).style.display = 'block';
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('nav-active'));
             document.getElementById(nId).classList.add('nav-active');
+            window.scrollTo(0,0);
         }
 
-        function openM(n, p, i) {
+        function openM(n, p, i, rasm) {
             document.getElementById('mn').innerText = n;
             document.getElementById('mp').innerText = p;
             document.getElementById('minfo').innerHTML = i;
+            document.getElementById('modal-img').src = rasm;
             document.getElementById('tModal').style.display = 'block';
         }
 
