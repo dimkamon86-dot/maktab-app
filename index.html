@@ -9,27 +9,30 @@
         :root { --blue: #003366; --gold: #d4af37; }
         body { font-family: sans-serif; background: #f4f7f9; margin: 0; padding: 0; padding-bottom: 100px; }
         
+        /* Header */
         .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid var(--gold); border-radius: 0 0 25px 25px; }
         .school-logo { width: 70px; height: 70px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
 
         .container { padding: 15px; }
-        .section { display: none; } /* Бошида ҳаммаси ёпиқ */
-        .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
-        input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
+        .section { display: none; } /* Ҳаммаси ёпиқ */
+        .active { display: block !important; } /* Фақат актив кўринади */
 
-        /* Тугмалар стили */
+        .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
+        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
+
+        /* Тугмалар */
         .contact-btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; font-size: 16px; text-align: center; text-decoration: none; color: white; }
         .bg-tg { background: #0088cc; }
         .bg-tel { background: #28a745; }
 
-        /* ПАСТКИ МЕНЮ */
+        /* Навигация */
         .nav-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
             background: white; display: flex; justify-content: space-around; 
-            padding: 12px 0; border-top: 1px solid #ddd; z-index: 9999;
+            padding: 12px 0 25px 0; border-top: 1px solid #ddd; z-index: 9999;
             box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
         }
-        .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 11px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+        .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 11px; cursor: pointer; }
         .nav-active { color: var(--blue); font-weight: bold; }
         .nav-icon { font-size: 22px; display: block; margin-bottom: 3px; }
         
@@ -44,7 +47,7 @@
     </div>
 
     <div class="container">
-        <div id="home" class="section" style="display: block;">
+        <div id="sec-home" class="section active">
             <div class="card">
                 <input type="text" id="studentSearch" placeholder="Ўқувчи исмини ёзинг..." oninput="searchStudent()">
             </div>
@@ -58,7 +61,7 @@
             </div>
         </div>
 
-        <div id="teachers" class="section">
+        <div id="sec-teachers" class="section">
             <div class="card">
                 <h3 style="color:var(--blue)">Устозларимиз</h3>
                 <p>• Мухайё Каримова - Биология</p>
@@ -68,7 +71,7 @@
             </div>
         </div>
 
-        <div id="feedback" class="section">
+        <div id="sec-feedback" class="section">
             <div class="card">
                 <h3 style="color:var(--blue)">Боғланиш</h3>
                 <a href="https://t.me/K_Dilmurod" class="contact-btn bg-tg">🔵 Telegram: @K_Dilmurod</a>
@@ -77,36 +80,69 @@
             </div>
         </div>
 
-        <div id="thanks" class="section">
+        <div id="sec-thanks" class="section">
             <div class="card">
                 <h3 style="color:var(--blue)">Миннатдорчиликлар</h3>
-                <p><i>"Мактабнинг рақамли тизими жуда қулай бўлибди, раҳмат!"</i></p>
+                <p><i>"Мактаб тизими жуда қулай, раҳмат!"</i></p>
             </div>
         </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item nav-active" id="btn1" onclick="showTab('home', 'btn1')">
+        <div class="nav-item nav-active" id="btn-1" onclick="openHome()">
             <span class="nav-icon">🏠</span>Асосий
         </div>
-        <div class="nav-item" id="btn2" onclick="showTab('teachers', 'btn2')">
+        <div class="nav-item" id="btn-2" onclick="openTeachers()">
             <span class="nav-icon">👨‍🏫</span>Устозлар
         </div>
-        <div class="nav-item" id="btn3" onclick="showTab('feedback', 'btn3')">
+        <div class="nav-item" id="btn-3" onclick="openFeedback()">
             <span class="nav-icon">✉️</span>Мурожаат
         </div>
-        <div class="nav-item" id="btn4" onclick="showTab('thanks', 'btn4')">
+        <div class="nav-item" id="btn-4" onclick="openThanks()">
             <span class="nav-icon">❤️</span>Раҳмат
         </div>
     </div>
 
     <script>
+        // Базада "алишер" кичик ҳарфда бўлиши керак
         const students = [
-            { key: "алишер", name: "АЛИШЕР СОБИРОВ", report: "Фарзандингиз математикадан аъло баҳо олди!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+            { key: "алишер", name: "АЛИШЕР СОБИРОВ", report: "Аъло баҳолар учун раҳмат!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
         ];
 
         function searchStudent() {
             let val = document.getElementById('studentSearch').value.toLowerCase().trim();
-            let res = students.find(s => s.key.includes(val) || s.name.toLowerCase().includes(val));
+            let card = document.getElementById('studentCard');
+            let welcome = document.getElementById('welcome');
+            
+            // Кичик бир ўзгариш: қидирув исмнинг ичида бор-йўқлигини текширади
+            let res = students.find(s => s.key.includes(val));
+            
             if (val.length > 0 && res) {
-                document.getElementById('studentCard
+                card.style.display = 'block';
+                welcome.style.display = 'none';
+                document.getElementById('sName').innerText = res.name;
+                document.getElementById('sReport').innerText = res.report;
+                document.getElementById('sVideo').src = res.video;
+            } else {
+                card.style.display = 'none';
+                welcome.style.display = 'block';
+            }
+        }
+
+        // Кўрсатиш функцияларини алоҳида қилдим (энг ишончли йўл)
+        function hideAll() {
+            var ss = document.getElementsByClassName('section');
+            for (var i = 0; i < ss.length; i++) { ss[i].classList.remove('active'); }
+            var bb = document.getElementsByClassName('nav-item');
+            for (var j = 0; j < bb.length; j++) { bb[j].classList.remove('nav-active'); }
+        }
+
+        function openHome() { hideAll(); document.getElementById('sec-home').classList.add('active'); document.getElementById('btn-1').classList.add('nav-active'); }
+        function openTeachers() { hideAll(); document.getElementById('sec-teachers').classList.add('active'); document.getElementById('btn-2').classList.add('nav-active'); }
+        function openFeedback() { hideAll(); document.getElementById('sec-feedback').classList.add('active'); document.getElementById('btn-3').classList.add('nav-active'); }
+        function openThanks() { hideAll(); document.getElementById('sec-thanks').classList.add('active'); document.getElementById('btn-4').classList.add('nav-active'); }
+
+        window.Telegram.WebApp.expand();
+    </script>
+</body>
+</html>
