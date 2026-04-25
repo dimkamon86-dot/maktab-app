@@ -3,145 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ibn Sino Jizzax</title>
+    <title>Ibn Sino Jizzax - Smart School</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { --blue: #003366; --gold: #d4af37; }
-        body { font-family: sans-serif; background: #f4f7f9; margin: 0; padding: 0; padding-bottom: 100px; }
-        
-        /* Header */
-        .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid var(--gold); border-radius: 0 0 25px 25px; }
-        .school-logo { width: 70px; height: 70px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
-
+        :root { --blue: #003366; --gold: #d4af37; --bg: #f0f4f8; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding-bottom: 100px; }
+        .header { background: var(--blue); color: white; padding: 25px 15px; text-align: center; border-bottom: 5px solid var(--gold); border-radius: 0 0 30px 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .school-logo { width: 75px; height: 75px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
         .container { padding: 15px; }
-        .section { display: none; } /* Ҳаммаси ёпиқ */
-        .active { display: block !important; } /* Фақат актив кўринади */
-
-        .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
-        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
-
-        /* Тугмалар */
-        .contact-btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; font-weight: bold; font-size: 16px; text-align: center; text-decoration: none; color: white; }
-        .bg-tg { background: #0088cc; }
-        .bg-tel { background: #28a745; }
-
-        /* Навигация */
-        .nav-bar { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: white; display: flex; justify-content: space-around; 
-            padding: 12px 0 25px 0; border-top: 1px solid #ddd; z-index: 9999;
-            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
-        }
-        .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 11px; cursor: pointer; }
+        .section { display: none; }
+        .active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: white; border-radius: 20px; padding: 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
+        .card-title { color: var(--blue); margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .list-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
+        .t-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+        .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 10% auto; padding: 25px; border-radius: 30px; width: 85%; text-align: center; position: relative; max-height: 80vh; overflow-y: auto; }
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid #ddd; z-index: 10000; }
+        .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 10px; cursor: pointer; }
         .nav-active { color: var(--blue); font-weight: bold; }
         .nav-icon { font-size: 22px; display: block; margin-bottom: 3px; }
-        
-        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo">
-        <h4 style="margin:10px 0 0 0;">IBN SINO JIZZAX</h4>
+        <h3 style="margin:10px 0 0 0; letter-spacing:1px;">IBN SINO JIZZAX</h3>
     </div>
 
     <div class="container">
-        <div id="sec-home" class="section active">
+        <div id="home" class="section active">
             <div class="card">
-                <input type="text" id="studentSearch" placeholder="Ўқувчи исмини ёзинг..." oninput="searchStudent()">
+                <h4 class="card-title"><span>🔍</span> O‘quvchi tahlili</h4>
+                <input type="text" id="sInput" style="width:100%; padding:12px; border-radius:10px; border:1px solid #ddd;" placeholder="Ismni yozing..." oninput="searchS()">
+                <div id="sResult" style="display:none; margin-top:15px; background:#eef7ff; padding:15px; border-radius:12px;">
+                    <b id="sn"></b><p id="sa" style="font-size:14px;"></p>
+                </div>
             </div>
-            <div id="studentCard" class="card" style="display:none;">
-                <h3 id="sName" style="margin:0; color:var(--blue)"></h3>
-                <p id="sReport" style="margin:10px 0; color:#333; line-height:1.5;"></p>
-                <div class="video-box"><iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe></div>
-            </div>
-            <div id="welcome" style="text-align:center; padding:40px 20px; color:#adb5bd;">
-                <span style="font-size:40px;">📚</span><br>Фарзандингиз маълумотини топиш учун исмини ёзинг
+            <div class="card">
+                <h4 class="card-title"><span>📰</span> Maktab yangiliklari</h4>
+                <p style="font-size:14px;">Maktabimizda barcha xodimlar ro'yxati va o'quvchi tahlili tizimi yangilandi.</p>
             </div>
         </div>
 
-        <div id="sec-teachers" class="section">
+        <div id="teachers" class="section">
             <div class="card">
-                <h3 style="color:var(--blue)">Устозларимиз</h3>
-                <p>• Мухайё Каримова - Биология</p>
-                <p>• Ҳилола Ўктамовна - Математика</p>
-                <p>• Аҳмадов Ижод - Директор ўринбосари</p>
-                <p>• Шохида Марсовна - Она тили</p>
+                <h4 class="card-title"><span>👨‍🏫</span> Rahbariyat va Ustozlar</h4>
+                <div id="t-list"></div>
             </div>
         </div>
 
-        <div id="sec-feedback" class="section">
+        <div id="edu" class="section">
             <div class="card">
-                <h3 style="color:var(--blue)">Боғланиш</h3>
-                <a href="https://t.me/K_Dilmurod" class="contact-btn bg-tg">🔵 Telegram: @K_Dilmurod</a>
-                <a href="tel:+998997712288" class="contact-btn bg-tel">📞 Алоқа: +998 99 771 22 88</a>
-                <a href="tel:+998933053383" class="contact-btn bg-tel">📞 Алоқа: +998 93 305 33 83</a>
+                <h4 class="card-title"><span>📚</span> Ta’lim va Testlar</h4>
+                <p>Tez orada fanlar bo‘yicha testlar bo‘limi ochiladi.</p>
             </div>
         </div>
 
-        <div id="sec-thanks" class="section">
+        <div id="contact" class="section">
             <div class="card">
-                <h3 style="color:var(--blue)">Миннатдорчиликлар</h3>
-                <p><i>"Мактаб тизими жуда қулай, раҳмат!"</i></p>
+                <h4 class="card-title"><span>✉️</span> Aloqa</h4>
+                <p>Telegram: @K_Dilmurod</p>
+                <p>Tel 1: +998 99 771 22 88</p>
+                <p>Tel 2: +998 93 305 33 83</p>
             </div>
+        </div>
+    </div>
+
+    <div id="tModal" class="modal">
+        <div class="modal-content">
+            <span style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;" onclick="closeM()">&times;</span>
+            <h3 id="mn" style="color:var(--blue); font-size:18px;"></h3>
+            <p id="mp" style="font-weight:bold; color:var(--gold); font-size:14px; margin:10px 0;"></p>
+            <div id="mi" style="font-size:13px; color:#444; text-align:left; line-height:1.6; border-top:1px solid #eee; padding-top:10px;"></div>
         </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item nav-active" id="btn-1" onclick="openHome()">
-            <span class="nav-icon">🏠</span>Асосий
-        </div>
-        <div class="nav-item" id="btn-2" onclick="openTeachers()">
-            <span class="nav-icon">👨‍🏫</span>Устозлар
-        </div>
-        <div class="nav-item" id="btn-3" onclick="openFeedback()">
-            <span class="nav-icon">✉️</span>Мурожаат
-        </div>
-        <div class="nav-item" id="btn-4" onclick="openThanks()">
-            <span class="nav-icon">❤️</span>Раҳмат
-        </div>
+        <div class="nav-item nav-active" id="n1" onclick="st('home', 'n1')"><span class="nav-icon">🏠</span>Asosiy</div>
+        <div class="nav-item" id="n2" onclick="st('teachers', 'n2')"><span class="nav-icon">👨‍🏫</span>Ustozlar</div>
+        <div class="nav-item" id="n3" onclick="st('edu', 'n3')"><span class="nav-icon">📚</span>Ta’lim</div>
+        <div class="nav-item" id="n4" onclick="st('contact', 'n4')"><span class="nav-icon">✉️</span>Aloqa</div>
     </div>
 
     <script>
-        // Базада "алишер" кичик ҳарфда бўлиши керак
-        const students = [
-            { key: "алишер", name: "АЛИШЕР СОБИРОВ", report: "Аъло баҳолар учун раҳмат!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+        const teachers = [
+            { n: "Karimqulov Dilmurod Qurbonboyevich", p: "Direktor", i: "Tug'ilgan vaqti: 19.12.1986. Ma’lumoti: Oliy (JDPU, 2009). Mutaxassisligi: Tarix va huquq. Toifasi: Oliy. Ish staji: 16 yil." },
+            { n: "Abdunazarova Gulnoza Isomiddinovna", p: "O‘quv ishlari bo‘yicha direktor o‘rinbosari", i: "Mutaxassisligi: Ingliz tili o‘qituvchisi. Toifasi: Birinchi. Ish staji: 14 yil. Ma'lumoti: Oliy." },
+            { n: "Ahmadov Ijod Narziqulovich", p: "Ijodiy-madaniy masalalar bo‘yicha targ‘ibotchi", i: "Ma’lumoti: Oliy (JDPU, 2009). Mutaxassisligi: Milliy istiqlol g‘oyasi, huquq va ma’naviyat. Toifasi: Oliy. Ish staji: 16 yil." },
+            { n: "Allayarova Ra’no Musurmonovna", p: "Ona tili va adabiyot o‘qituvchisi", i: "Mutaxassisligi: Filolog. Toifasi: Birinchi. Ish staji: 24 yil. Ma'lumoti: Oliy." },
+            { n: "Kurbanova Gulsara Saparovna", p: "Rus tili o‘qituvchisi", i: "Mutaxassisligi: Rus tili va adabiyoti. Toifasi: Ikkinchi. Ish staji: 25 yil." },
+            { n: "Norbekova Shohida Marsovna", p: "Ona tili va adabiyot o‘qituvchisi", i: "Mutaxassisligi: Filolog. Toifasi: Birinchi. Ish staji: 19 yil." },
+            { n: "Raxmatova Gulzoda Oktamovna", p: "Matematika o‘qituvchisi", i: "Mutaxassisligi: Matematika va informatika. Toifasi: Birinchi. Ish staji: 11 yil." },
+            { n: "Yuldasheva Nargiza Farxadovna", p: "Ingliz tili o‘qituvchisi", i: "Mutaxassisligi: Ingliz tili. Toifasi: Ikkinchi. Ish staji: 16 yil." },
+            { n: "Eshbekova Muxayyo Qudratovna", p: "Biologiya o‘qituvchisi", i: "Mutaxassisligi: Biologiya. Toifasi: Ikkinchi. Ish staji: 15 yil." },
+            { n: "Turg‘unov Alisher Eliboy o‘g‘li", p: "Geografiya fani o‘qituvchisi", i: "Ma’lumoti: Magistr (JDPU, 2022). Mutaxassisligi: Geografiya fani. Toifasi: Oliy. Ish staji: 11 yil." },
+            { n: "Norbekov Alisher Marsovich", p: "Jismoniy tarbiya fani o‘qituvchisi", i: "Mutaxassisligi: Jismoniy madaniyat. Toifasi: Birinchi. Ish staji: 23 yil." },
+            { n: "Maxmudova Nilufar Xalilovna", p: "San'at (ART) o‘qituvchisi", i: "Ma'lumoti: Oliy (JDPU). Mutaxassisligi: Musiqa ta'limi. Ish staji: 24 yil." },
+            { n: "Hamdamova Dilafro'z Abduvoxidovna", p: "Matematika o‘qituvchisi", i: "Toifasi: Oliy. Ish staji: 18 yil. Mutaxassisligi: Matematika va informatika." },
+            { n: "Qurbonov Dilmurod Sayfullayevich", p: "Jismoniy tarbiya fani o‘qituvchisi", i: "Mutaxassisligi: Jismoniy madaniyat. Toifasi: Ikkinchi. Ish staji: 23 yil." },
+            { n: "Isayeva Gulbahor G'ayratovna", p: "Matematika o‘qituvchisi", i: "Mutaxassisligi: Matematika. Toifasi: Birinchi. Ish staji: 23 yil." },
+            { n: "Sharipova Sayyora Shuxratovna", p: "Fizika fani o‘qituvchisi", i: "Mutaxassisligi: Fizika va astronomiya. Toifasi: Birinchi. Ish staji: 11 yil." },
+            { n: "Abdurashidova Farida Akmalovna", p: "Kimyo fani o‘qituvchisi", i: "Mutaxassisligi: Kimyo. Toifasi: Birinchi. Ish staji: 15 yil." },
+            { n: "Quvondiqova Barno Ibragimovna", p: "Informatika o‘qituvchisi", i: "Mutaxassisligi: Matematika va informatika. Toifasi: Birinchi. Ish staji: 11 yil." },
+            { n: "Oripova Mavluda Odilovna", p: "Ingliz tili o‘qituvchisi", i: "Mutaxassisligi: Filolog (Ingliz tili). Toifasi: Ikkinchi. Ish staji: 13 yil." },
+            { n: "Karimova Muxayyo Ismoil qizi", p: "Biologiya o‘qituvchisi", i: "Mutaxassisligi: Biologiya. Toifasi: Ikkinchi. Ish staji: 15 yil." },
+            { n: "Ismatov Bekzod Bo'riboyevich", p: "Chaqiruvga qadar boshlang‘ich tayyorgarlik fani o‘qituvchisi", i: "Mutaxassisligi: Chaqiruvga qadar boshlang'ich tayyorgarlik. Ish staji: 3 yil." },
+            { n: "Xusanova Maxfuza Erkinovna", p: "Kutubxonachi", i: "Ma'lumoti: O'rta maxsus. Ish staji: 11 yil." },
+            { n: "Karimova Zebo Qaxramonovna", p: "Psixolog", i: "Mutaxassisligi: Amaliy psixologiya. Ish staji: 15 yil." },
+            { n: "Xolmatova Manzura Xamidovna", p: "Hamshira", i: "Ma'lumoti: O'rta maxsus (Hamshiralik ishi). Ish staji: 19 yil." },
+            { n: "Omonova Zulfiya Tursunpo'latovna", p: "Xo'jalik mudiri", i: "Mutaxassisligi: Hamshiralik ishi. Ish staji: 34 yil." },
+            { n: "Qo'shboqova Laylo Erkinovna", p: "Kadrlar bo'yicha inspektor", i: "Mutaxassisligi: Amaliy matematika. Ish staji: 11 yil." },
+            { n: "Qobilov Bekmurod To'raqul o'g'li", p: "Yurist", i: "Mutaxassisligi: Huquqshunoslik. Ish staji: 3 yil." }
         ];
 
-        function searchStudent() {
-            let val = document.getElementById('studentSearch').value.toLowerCase().trim();
-            let card = document.getElementById('studentCard');
-            let welcome = document.getElementById('welcome');
-            
-            // Кичик бир ўзгариш: қидирув исмнинг ичида бор-йўқлигини текширади
-            let res = students.find(s => s.key.includes(val));
-            
-            if (val.length > 0 && res) {
-                card.style.display = 'block';
-                welcome.style.display = 'none';
-                document.getElementById('sName').innerText = res.name;
-                document.getElementById('sReport').innerText = res.report;
-                document.getElementById('sVideo').src = res.video;
-            } else {
-                card.style.display = 'none';
-                welcome.style.display = 'block';
-            }
+        function renderT() {
+            const l = document.getElementById('t-list');
+            l.innerHTML = '';
+            teachers.forEach((t) => {
+                const d = document.createElement('div');
+                d.className = 'list-btn';
+                d.onclick = () => openM(t.n, t.p, t.i);
+                d.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div class="t-icon">${t.n[0]}</div><div style="text-align:left;"><b>${t.n.split(' ')[0]} ${t.n.split(' ')[1]}</b><br><small style="color:#777;">${t.p}</small></div></div><span>➡️</span>`;
+                l.appendChild(d);
+            });
         }
 
-        // Кўрсатиш функцияларини алоҳида қилдим (энг ишончли йўл)
-        function hideAll() {
-            var ss = document.getElementsByClassName('section');
-            for (var i = 0; i < ss.length; i++) { ss[i].classList.remove('active'); }
-            var bb = document.getElementsByClassName('nav-item');
-            for (var j = 0; j < bb.length; j++) { bb[j].classList.remove('nav-active'); }
+        function st(sId, nId) {
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+            document.getElementById(sId).style.display = 'block';
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('nav-active'));
+            document.getElementById(nId).classList.add('nav-active');
+            window.scrollTo(0,0);
         }
 
-        function openHome() { hideAll(); document.getElementById('sec-home').classList.add('active'); document.getElementById('btn-1').classList.add('nav-active'); }
-        function openTeachers() { hideAll(); document.getElementById('sec-teachers').classList.add('active'); document.getElementById('btn-2').classList.add('nav-active'); }
-        function openFeedback() { hideAll(); document.getElementById('sec-feedback').classList.add('active'); document.getElementById('btn-3').classList.add('nav-active'); }
-        function openThanks() { hideAll(); document.getElementById('sec-thanks').classList.add('active'); document.getElementById('btn-4').classList.add('nav-active'); }
+        function openM(n, p, i) {
+            document.getElementById('mn').innerText = n;
+            document.getElementById('mp').innerText = p;
+            document.getElementById('mi').innerHTML = i;
+            document.getElementById('tModal').style.display = 'block';
+        }
 
+        function closeM() { document.getElementById('tModal').style.display = 'none'; }
+
+        function searchS() {
+            let v = document.getElementById('sInput').value.toLowerCase().trim();
+            let res = document.getElementById('sResult');
+            if(v.length > 0) {
+                res.style.display = 'block';
+                document.getElementById('sn').innerText = v.toUpperCase();
+                document.getElementById('sa').innerText = "Ma’lumotlar bazadan tekshirilmoqda...";
+            } else { res.style.display = 'none'; }
+        }
+
+        renderT();
         window.Telegram.WebApp.expand();
     </script>
 </body>
