@@ -3,137 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ibn Sino Jizzax</title>
+    <title>Ibn Sino Jizzax - Smart School</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: sans-serif; background: #f0f4f8; margin: 0; padding: 0; padding-bottom: 90px; }
-        .header { background: #003366; color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid #d4af37; }
-        .school-logo { width: 70px; height: 70px; border-radius: 50%; background: white; border: 2px solid #d4af37; }
+        :root { --blue: #003366; --gold: #d4af37; --bg: #f4f7f9; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 0; padding-bottom: 100px; }
         
+        /* Юқори қисм */
+        .header { background: var(--blue); color: white; padding: 25px 10px; text-align: center; border-bottom: 5px solid var(--gold); border-radius: 0 0 30px 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .school-logo { width: 80px; height: 80px; border-radius: 50%; background: white; border: 3px solid var(--gold); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .header h3 { margin: 10px 0 5px 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; }
+
         .container { padding: 15px; }
-        .section { display: none; } /* Ҳаммаси бошида ёпиқ бўлади */
+        .section { display: none; min-height: 400px; }
+        .active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Карточкалар */
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 20px; border: 1px solid #e1e8ed; }
+        .card-title { color: var(--blue); margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
         
-        .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; }
+        /* Қидирув */
+        .search-box { position: relative; }
+        input { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #ddd; font-size: 16px; outline: none; transition: 0.3s; box-sizing: border-box; }
+        input:focus { border-color: var(--blue); box-shadow: 0 0 10px rgba(0,51,102,0.1); }
+
+        /* Видео ва натижа */
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 15px; margin-top: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .result-name { font-size: 22px; font-weight: bold; color: var(--blue); margin: 10px 0; }
+        .result-text { font-size: 15px; color: #444; line-height: 1.6; }
+
+        /* Устозлар рўйхати */
+        .teacher-item { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .teacher-img { width: 50px; height: 50px; border-radius: 50%; background: var(--blue); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
 
         /* Алоқа тугмалари */
-        .btn-link { 
-            display: block; width: 100%; padding: 15px; margin-bottom: 10px; 
-            border-radius: 12px; font-weight: bold; font-size: 16px; 
-            text-align: center; text-decoration: none; color: white; box-sizing: border-box;
-        }
+        .contact-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px; margin-bottom: 15px; border-radius: 15px; font-weight: bold; font-size: 16px; text-decoration: none; color: white; transition: 0.3s; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .bg-tg { background: linear-gradient(135deg, #0088cc, #00aaff); }
+        .bg-tel { background: linear-gradient(135deg, #28a745, #34ce57); }
+        .contact-btn:active { transform: scale(0.96); }
 
-        /* Пастки меню - Энг муҳим қисми */
-        .nav-bar { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: white; display: flex; justify-content: space-around; 
-            padding: 12px 0; border-top: 1px solid #ddd; z-index: 99999;
-        }
-        .nav-item { text-align: center; flex: 1; color: #777; font-size: 11px; cursor: pointer; border: none; background: none; outline: none; }
-        .nav-active { color: #003366; font-weight: bold; }
-        .nav-icon { font-size: 22px; display: block; margin-bottom: 2px; }
-
-        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 10px; margin-top: 10px; overflow: hidden; }
+        /* Пастки навигация */
+        .nav-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 10px 0 20px 0; border-top: 1px solid #ddd; z-index: 10000; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); }
+        .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 11px; cursor: pointer; transition: 0.3s; }
+        .nav-active { color: var(--blue); font-weight: bold; transform: translateY(-5px); }
+        .nav-icon { font-size: 24px; display: block; margin-bottom: 3px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo">
-        <h4 style="margin:10px 0 0 0;">Abu Ali ibn Sino Jizzax</h4>
+        <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo" alt="Logo">
+        <h3>Ibn Sino Jizzax</h3>
+        <small>Smart Education System</small>
     </div>
 
     <div class="container">
-        <div id="home" class="section" style="display: block;">
-            <div class="card">
-                <input type="text" id="studentSearch" placeholder="Исмни ёзинг..." oninput="searchStudent()">
+        <div id="home" class="section active">
+            <div class="card search-box">
+                <h3 class="card-title"><span>🔍</span> Ўқувчини қидириш</h3>
+                <input type="text" id="studentSearch" placeholder="Исм ёки фамилияни ёзинг..." oninput="searchStudent()">
             </div>
+            
             <div id="studentCard" class="card" style="display:none;">
-                <h3 id="sName" style="margin:0; color:#003366"></h3>
-                <p id="sReport" style="margin:10px 0; color:#333;"></p>
-                <div class="video-box"><iframe id="sVideo" width="100%" height="100%" frameborder="0"></iframe></div>
+                <div class="result-name" id="sName"></div>
+                <div class="result-text" id="sReport"></div>
+                <div class="video-box">
+                    <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                </div>
             </div>
-            <div id="welcome" style="text-align:center; color:#888; margin-top:40px;">🔍 Исмни ёзиб қидиринг.</div>
+
+            <div id="welcome" style="text-align:center; padding:60px 20px; color:#adb5bd;">
+                <span style="font-size:50px;">📚</span><br>
+                <b>Рақамли маълумотлар базаси</b><br>
+                Фарзандингизнинг натижаларини кўриш учун қидирувдан фойдаланинг.
+            </div>
         </div>
 
         <div id="teachers" class="section">
             <div class="card">
-                <h3>Бизнинг устозлар</h3>
-                <p>• Мухайё Каримова (Биология)</p>
-                <p>• Ҳилола Ўктамовна (Математика)</p>
-                <p>• Аҳмадов Ижод (Директор ўринбосари)</p>
+                <h3 class="card-title"><span>👨‍🏫</span> Малакали устозларимиз</h3>
+                <div class="teacher-item">
+                    <div class="teacher-img">MK</div>
+                    <div><b>Мухайё Каримова</b><br><small>Биология фани ўқитувчиси</small></div>
+                </div>
+                <div class="teacher-item">
+                    <div class="teacher-img">HU</div>
+                    <div><b>Ҳилола Ўктамовна</b><br><small>Математика фани ўқитувчиси</small></div>
+                </div>
+                <div class="teacher-item">
+                    <div class="teacher-img">AI</div>
+                    <div><b>Аҳмадов Ижод</b><br><small>Директор ўринбосари</small></div>
+                </div>
+                <div class="teacher-item">
+                    <div class="teacher-img">SM</div>
+                    <div><b>Шохида Marsovna</b><br><small>Она тили ва адабиёт</small></div>
+                </div>
             </div>
         </div>
 
         <div id="feedback" class="section">
             <div class="card">
-                <h3>Алоқа ва Мурожаат</h3>
-                <a href="https://t.me/ibnsino_jizzax_bot" class="btn-link" style="background: #0088cc;">🔵 Telegram орқали ёзиш</a>
-                <a href="tel:+998901234567" class="btn-link" style="background: #28a745;">📞 Алоқа: +998 90 123 45 67</a>
-                <a href="tel:+998912345678" class="btn-link" style="background: #28a745;">📞 Алоқа: +998 91 234 56 78</a>
+                <h3 class="card-title"><span>📞</span> Биз билан боғланиш</h3>
+                <p style="color:#666; font-size:14px; margin-bottom:20px; line-height:1.5;">
+                    Ҳурматли ота-оналар, мактаб маъмурияти ҳар қандай таклиф ва мурожаатлар учун очиқ:
+                </p>
+                
+                <a href="https://t.me/K_Dilmurod" class="contact-btn bg-tg">
+                    <span>🔵</span> Telegram: @K_Dilmurod
+                </a>
+                
+                <a href="tel:+998997712288" class="contact-btn bg-tel">
+                    <span>📞</span> Алоқа: +998 99 771 22 88
+                </a>
+
+                <a href="tel:+998933053383" class="contact-btn bg-tel">
+                    <span>📞</span> Алоқа: +998 93 305 33 83
+                </a>
+
+                <div style="margin-top:20px; padding:15px; background:#f8f9fa; border-radius:10px; font-size:13px; color:#777;">
+                    📍 Манзил: Жиззах шаҳри, Абу Али ибн Сино номидаги ихтисослаштирилган мактаб-интернати.
+                </div>
             </div>
         </div>
 
         <div id="thanks" class="section">
             <div class="card">
-                <h3>Миннатдорчиликлар</h3>
-                <p><i>"Мактаб тизими аъло даражада!"</i> - Ота-оналар.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="nav-bar">
-        <div class="nav-item nav-active" id="n1" onclick="changeSection('home', 'n1')">
-            <span class="nav-icon">🏠</span>Асосий
-        </div>
-        <div class="nav-item" id="n2" onclick="changeSection('teachers', 'n2')">
-            <span class="nav-icon">👨‍🏫</span>Устозлар
-        </div>
-        <div class="nav-item" id="n3" onclick="changeSection('feedback', 'n3')">
-            <span class="nav-icon">📞</span>Мурожаат
-        </div>
-        <div class="nav-item" id="n4" onclick="changeSection('thanks', 'n4')">
-            <span class="nav-icon">❤️</span>Раҳмат
-        </div>
-    </div>
-
-    <script>
-        const students = [
-            { key: "alisher", name: "АЛИШЕР СОБИРОВ", msg: "Математикадан аъло баҳо!", vid: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
-        ];
-
-        function searchStudent() {
-            var val = document.getElementById('studentSearch').value.toLowerCase().trim();
-            var res = students.find(s => s.key.includes(val) || s.name.toLowerCase().includes(val));
-            if (val.length > 0 && res) {
-                document.getElementById('studentCard').style.display = 'block';
-                document.getElementById('welcome').style.display = 'none';
-                document.getElementById('sName').innerText = res.name;
-                document.getElementById('sReport').innerText = res.msg;
-                document.getElementById('sVideo').src = res.vid;
-            } else {
-                document.getElementById('studentCard').style.display = 'none';
-                document.getElementById('welcome').style.display = 'block';
-            }
-        }
-
-        function changeSection(secId, navId) {
-            // Ҳамма секцияларни ёпиш
-            var s = document.getElementsByClassName('section');
-            for (var i = 0; i < s.length; i++) { s[i].style.display = 'none'; }
-            
-            // Танланганни очиш
-            document.getElementById(secId).style.display = 'block';
-            
-            // Меню рангини ўзгартириш
-            var n = document.getElementsByClassName('nav-item');
-            for (var j = 0; j < n.length; j++) { n[j].classList.remove('nav-active'); }
-            document.getElementById(navId).classList.add('nav-active');
-            
-            window.scrollTo(0,0);
-        }
-
-        window.Telegram.WebApp.expand();
-    </script>
-</body>
-</html>
