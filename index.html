@@ -131,12 +131,17 @@
         { n: "Qosimov Avaz Donayevich", p: "XIBDO'", i: "Mutaxassisligi: Mexanik injener. Ish staji: 33 yil.", img: "18.jpg" }
     ];
 
-    const aiKnowledge = [
-        { keys: ["direktor", "rahbar", "dilmurod"], ans: "Maktab direktori - Karimqulov Dilmurod Qurbonboyevich." },
-        { keys: ["zakovat", "tanlov"], ans: "Zakovat har hafta juma kuni soat 15:00 da o'tkaziladi." },
-        { keys: ["manzil", "joy"], ans: "Maktabimiz Jizzax shahrida joylashgan." },
-        { keys: ["salom", "assalom"], ans: "Vaalaykum assalom! Men Ibn Sino AI yordamchisiman." }
-    ];
+   const aiKnowledge = [
+        { keys: ["direktor", "rahbar", "dilmurod", "boshliq"], ans: "Maktab direktori - Karimqulov Dilmurod Qurbonboyevich. Qabul kunlari: Dushanba-Juma, 09:00-17:00." },
+        { keys: ["manzil", "joy", "qayerda", "lokatsiya"], ans: "Maktabimiz Jizzax shahrida жойлашган. Батафсил манзил учун маъмурият билан боғланинг." },
+        { keys: ["zakovat", "tanlov", "o'yin", "turnir"], ans: "Zakovat intellektual o'yinlari har hafta juma kuni soat 15:00 da faollar zalida o'tkaziladi." },
+        { keys: ["forma", "kiyim", "maktab formasi"], ans: "Maktabimizda оқ кўйлак ва тўқ кўк шим (юбка) классик формаси амал қилади." },
+        { keys: ["imtihon", "test", "nazorat"], ans: "Choraklik imtihonlar va testlar jadvalini 'Ta'lim' bo'limidan ko'rishingiz mumkin." },
+        { keys: ["video", "dars", "youtube"], ans: "Video darslarimiz 'Ta'lim' bo'limiga joylangan, у ерда кимё ва биологиядан қизиқарли дарслар бор." },
+        { keys: ["aloqa", "telefon", "nomer"], ans: "Maktab raqamlari: +998 99 771 22 88 ёки +998 93 305 33 83." },
+        { keys: ["salom", "assalom", "hello", "qalaysiz"], ans: "Vaalaykum assalom! Men Ibn Sino AI yordamchisiman. Sizga qanday yordam bera olaman?" }
+       
+        ];
 
     function initChat() { document.getElementById('chat-container').style.display = 'block'; document.getElementById('startAiBtn').style.display = 'none'; }
 
