@@ -3,120 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ibn Sino Jizzax - Smart School</title>
+    <title>Ibn Sino Jizzax - Platforma</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f9; margin: 0; padding-bottom: 70px; }
-        .header { background: #003366; color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
-        .school-logo { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #d4af37; margin-bottom: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f9; margin: 0; padding-bottom: 80px; }
+        .header { background: #003366; color: white; padding: 15px; text-align: center; border-radius: 0 0 20px 20px; position: sticky; top: 0; z-index: 100; }
+        .school-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #d4af37; }
         
         .container { padding: 15px; }
-        .section { display: none; }
+        .section { display: none; animation: fadeIn 0.5s; }
         .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Қидирув стили */
-        .search-box { margin-bottom: 15px; }
-        #studentSearch { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ddd; outline: none; }
-
-        /* Карталар стили */
         .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); margin-bottom: 15px; }
-        .news-img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-top: 10px; box-sizing: border-box; }
+        
+        .teacher-item { display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .teacher-img { width: 50px; height: 50px; border-radius: 50%; background: #eee; }
 
-        /* Пастки меню */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
-        .nav-item { text-align: center; font-size: 11px; color: #666; cursor: pointer; flex: 1; }
-        .nav-item i { display: block; font-size: 20px; margin-bottom: 3px; }
+        .nav-item { text-align: center; font-size: 10px; color: #666; cursor: pointer; flex: 1; }
         .nav-active { color: #003366; font-weight: bold; }
+        
+        .btn-send { background: #003366; color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo">
-        <h4 style="margin:0">Abu Ali ibn Sino Jizzax Branch</h4>
+        <h4 style="margin:5px 0 0 0">Abu Ali ibn Sino Jizzax</h4>
     </div>
 
     <div class="container">
         
         <div id="home" class="section active">
-            <div class="search-box">
-                <input type="text" id="studentSearch" placeholder="Исмни киритинг (Лотин/Крилл)..." onkeyup="searchStudent()">
-            </div>
-            <div id="studentCard" class="card" style="display:none">
-                <h3 id="sName" style="margin:0 0 5px 0"></h3>
-                <span id="sClass" style="color:#003366; font-weight:bold"></span>
-                <div class="video-container">
+            <input type="text" id="studentSearch" placeholder="Ўқувчи исми (Лотин/Крилл)..." onkeyup="searchStudent()">
+            <div id="studentCard" class="card" style="display:none; margin-top:15px;">
+                <h3 id="sName" style="margin:0"></h3>
+                <p id="sReport" style="font-size:14px; color:#444"></p>
+                <div style="width:100%; aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden;">
                     <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <p id="sReport" style="font-size:14px; color:#444"></p>
-            </div>
-            <div id="welcomeMsg" style="text-align:center; color:#888; margin-top:30px;">
-                Фарзандингиз исмини ёзиб қидиринг
             </div>
         </div>
 
-        <div id="news" class="section">
-            <h2>Мактаб янгиликлари</h2>
+        <div id="teachers" class="section">
+            <h3>Бизнинг устозлар</h3>
             <div class="card">
-                <img src="photo_2026-02-13_08-43-51.jpg" class="news-img">
-                <h4>Яшил макон тадбири</h4>
-                <p style="font-size:13px">Мактабимиз ҳудудига 20 та арча кўчатлари экилди...</p>
+                <div class="teacher-item">
+                    <div class="teacher-img"></div>
+                    <div><b>Мухайё Каримова</b><br><small>Биология фани ўқитувчиси</small></div>
+                </div>
+                <div class="teacher-item">
+                    <div class="teacher-img"></div>
+                    <div><b>Ҳилола Ўктамовна</b><br><small>Математика фани ўқитувчиси</small></div>
+                </div>
             </div>
         </div>
 
-        <div id="meetings" class="section">
-            <h2>Ота-оналар мажлиси</h2>
+        <div id="feedback" class="section">
+            <h3>Мурожаат йўллаш</h3>
             <div class="card">
-                <h4 style="color:#d32f2f">📅 25-Апрель, 15:00</h4>
-                <p>9-А синф ота-оналар мажлиси. Кун тартиби: Чорак якунлари ва имтиҳонлар.</p>
-                <button style="background:#003366; color:white; border:none; padding:10px; border-radius:5px; width:100%">Zoom ҳаволаси</button>
+                <p style="font-size:13px">Таклиф ёки шикоятларингизни қолдиринг. Маъмурият тез орада жавоб беради.</p>
+                <input type="text" placeholder="Исмингиз">
+                <textarea rows="4" placeholder="Хабар матни..."></textarea>
+                <button class="btn-send" onclick="sendMsg()">Юбориш</button>
+            </div>
+        </div>
+
+        <div id="thanks" class="section">
+            <h3>Миннатдорчиликлар</h3>
+            <div class="card" style="border-left: 5px solid #d4af37;">
+                <i>"Фарзандимнинг кимё фанига бўлган қизиқишини уйғотган барча устозларга раҳмат!"</i>
+                <p style="text-align:right; margin:5px 0 0 0; font-weight:bold;">— Олимжон ака</p>
+            </div>
+            <div class="card" style="border-left: 5px solid #d4af37;">
+                <i>"Мактабдаги тартиб-интизом ва АИ технологияларнинг жорий этилиши бизни хурсанд қилди."</i>
+                <p style="text-align:right; margin:5px 0 0 0; font-weight:bold;">— Гулноза опа</p>
             </div>
         </div>
 
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item nav-active" onclick="showSection('home', this)">🏠<span>Асосий</span></div>
-        <div class="nav-item" onclick="showSection('news', this)">📰<span>Янгиликлар</span></div>
-        <div class="nav-item" onclick="showSection('meetings', this)">👨‍👩‍👧<span>Мажлислар</span></div>
+        <div class="nav-item nav-active" onclick="showSection('home', this)">🏠<br>Асосий</div>
+        <div class="nav-item" onclick="showSection('teachers', this)">👨‍🏫<br>Устозлар</div>
+        <div class="nav-item" onclick="showSection('feedback', this)">✉️<br>Мурожаат</div>
+        <div class="nav-item" onclick="showSection('thanks', this)">❤️<br>Раҳматлар</div>
     </div>
 
     <script>
-        // Крилл-Лотин мослаштириш функцияси
-        function transliterate(text) {
-            const map = {
-                'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'j','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'x','ц':'ts','ч':'ch','ш':'sh','ъ':'','э':'e','ю':'yu','я':'ya'
-            };
-            return text.toLowerCase().split('').map(char => map[char] || char).join('');
-        }
-
         const students = [
-            { name: "Alisher Sobirov", nameKiril: "Алишер Собиров", class: "9-A", report: "Математикадан юқори натижа!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
-            { name: "Jasur Olimov", nameKiril: "Жасур Олимов", class: "10-B", report: "Кимё фанидан ғолиб.", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+            { name: "Alisher Sobirov", nameKiril: "Алишер Собиров", report: "Математикадан аъло!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
         ];
 
         function searchStudent() {
             let input = document.getElementById('studentSearch').value.toLowerCase();
-            let inputTrans = transliterate(input);
             let card = document.getElementById('studentCard');
-            let msg = document.getElementById('welcomeMsg');
-
-            let result = students.find(s => 
-                s.name.toLowerCase().includes(input) || 
-                s.nameKiril.toLowerCase().includes(input) ||
-                transliterate(s.nameKiril).includes(inputTrans)
-            );
-
+            let result = students.find(s => s.name.toLowerCase().includes(input) || s.nameKiril.toLowerCase().includes(input));
             if (input.length > 2 && result) {
-                card.style.display = 'block'; msg.style.display = 'none';
+                card.style.display = 'block';
                 document.getElementById('sName').innerText = result.nameKiril;
-                document.getElementById('sClass').innerText = result.class + " синф";
                 document.getElementById('sReport').innerText = result.report;
                 document.getElementById('sVideo').src = result.video;
-            } else {
-                card.style.display = 'none'; msg.style.display = 'block';
-            }
+            } else { card.style.display = 'none'; }
         }
 
         function showSection(id, el) {
@@ -124,6 +115,11 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('nav-active'));
             el.classList.add('nav-active');
+        }
+
+        function sendMsg() {
+            alert("Хабарингиз юборилди. Раҳмат!");
+            tg.close();
         }
 
         let tg = window.Telegram.WebApp;
