@@ -7,8 +7,8 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7f9; margin: 0; padding-bottom: 80px; }
-        .header { background: #003366; color: white; padding: 15px; text-align: center; border-radius: 0 0 20px 20px; position: sticky; top: 0; z-index: 100; }
-        .school-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #d4af37; }
+        .header { background: #003366; color: white; padding: 15px; text-align: center; border-radius: 0 0 20px 20px; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .school-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #d4af37; background: #fff; }
         .container { padding: 15px; }
         .section { display: none; }
         .active { display: block; animation: fadeIn 0.4s; }
@@ -16,12 +16,12 @@
         .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); margin-bottom: 15px; }
         input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-top: 10px; box-sizing: border-box; font-size: 16px; }
         .teacher-item { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #eee; padding: 12px 0; }
-        .teacher-avatar { width: 50px; height: 50px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; z-index: 100; }
+        .teacher-avatar { width: 45px; height: 45px; border-radius: 50%; background: #003366; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; z-index: 1000; }
         .nav-item { text-align: center; font-size: 10px; color: #666; cursor: pointer; flex: 1; }
         .nav-active { color: #003366; font-weight: bold; }
-        .btn-send { background: #28a745; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; margin-top: 15px; font-weight: bold; font-size: 16px; }
-        .thanks-card { border-left: 5px solid #d4af37; background: #fff9e6; }
+        .btn-send { background: #28a745; color: white; border: none; padding: 15px; border-radius: 10px; width: 100%; margin-top: 15px; font-weight: bold; font-size: 16px; cursor: pointer; }
+        .thanks-card { border-left: 5px solid #d4af37; background: #fffdf5; }
     </style>
 </head>
 <body>
@@ -41,45 +41,48 @@
                     <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
-            <div id="welcome" style="text-align:center; color:#888; margin-top:50px;">Исмни ёзиб қидиринг...</div>
+            <div id="welcome" style="text-align:center; color:#888; margin-top:50px;">
+                🔍 <b>Қидирув:</b> Фарзандингиз исмини киритинг
+            </div>
         </div>
 
         <div id="teachers" class="section">
-            <h3>Бизнинг устозлар</h3>
+            <h3 style="color:#003366">Бизнинг устозлар</h3>
             <div class="card">
                 <div class="teacher-item">
                     <div class="teacher-avatar">MK</div>
-                    <div><b>Мухайё Каримова</b><br><small>Биология фани</small></div>
+                    <div><b>Мухайё Каримова</b><br><small>Биология фани ўқитувчиси</small></div>
                 </div>
                 <div class="teacher-item">
                     <div class="teacher-avatar">HU</div>
-                    <div><b>Ҳилола Ўктамовна</b><br><small>Математика фани</small></div>
+                    <div><b>Ҳилола Ўктамовна</b><br><small>Математика фани ўқитувчиси</small></div>
                 </div>
                 <div class="teacher-item">
                     <div class="teacher-avatar">AI</div>
-                    <div><b>Аҳмадов Ижод</b><br><small>Ижодий ишлар</small></div>
+                    <div><b>Аҳмадов Ижод</b><br><small>Ижодий ишлар бўйича директор ўринбосари</small></div>
                 </div>
             </div>
         </div>
 
         <div id="feedback" class="section">
-            <h3>Маъмуриятга мурожаат</h3>
+            <h3 style="color:#003366">Маъмуриятга мурожаат</h3>
             <div class="card">
-                <input type="text" id="parentName" placeholder="Исмингиз">
-                <textarea id="parentMsg" rows="4" placeholder="Хабар матни ёки таклифингиз..."></textarea>
+                <p style="font-size:13px; color:#666">Таклиф ёки шикоятларингизни қолдиринг. Хабар тўғридан-тўғри маъмуриятга етиб боради.</p>
+                <input type="text" id="parentName" placeholder="Исмингиз ва Фамилиянгиз">
+                <textarea id="parentMsg" rows="4" placeholder="Мурожаат матнини ёзинг..."></textarea>
                 <button class="btn-send" onclick="sendToBot()">ЮБОРИШ</button>
             </div>
         </div>
 
         <div id="thanks" class="section">
-            <h3>Миннатдорчиликлар</h3>
+            <h3 style="color:#003366">Миннатдорчиликлар</h3>
             <div class="card thanks-card">
-                <i>"АИ технологияларнинг мактабда қўлланилиши жуда инновацион бўлибди. Раҳмат!"</i>
-                <p style="text-align:right; margin:5px 0 0 0;"><b>— Бахтиёр ака</b></p>
+                <i>"АИ технологияларнинг мактабда қўлланилиши фарзандларимизнинг дунёқарашини кенгайтирмоқда. Раҳмат!"</i>
+                <p style="text-align:right; margin:5px 0 0 0; color:#003366"><b>— Бахтиёр ака</b></p>
             </div>
             <div class="card thanks-card">
-                <i>"Устозларнинг эътибори учун миннатдормиз."</i>
-                <p style="text-align:right; margin:5px 0 0 0;"><b>— Шохида опа</b></p>
+                <i>"Ибн Сино мактаби — нафақат билим, балки келажак макони. Барча устозларга соғлик тилайман."</i>
+                <p style="text-align:right; margin:5px 0 0 0; color:#003366"><b>— Шохида опа</b></p>
             </div>
         </div>
     </div>
@@ -92,15 +95,20 @@
     </div>
 
     <script>
+        // ЎҚУВЧИЛАР БАЗАСИ (Лотин ва Крилл варианти билан)
         const students = [
-            { name: "Alisher Sobirov", nameKiril: "Алишер Собиров", report: "Математикадан аъло!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+            { name: "Alisher Sobirov", nameKiril: "Алишер Собиров", report: "Фарзандингиз математикадан аъло баҳо олди!", video: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
         ];
 
         function searchStudent() {
             let input = document.getElementById('studentSearch').value.toLowerCase();
             let card = document.getElementById('studentCard');
             let welcome = document.getElementById('welcome');
-            let result = students.find(s => s.name.toLowerCase().includes(input) || s.nameKiril.toLowerCase().includes(input));
+            
+            let result = students.find(s => 
+                s.name.toLowerCase().includes(input) || 
+                s.nameKiril.toLowerCase().includes(input)
+            );
             
             if (input.length > 2 && result) {
                 card.style.display = 'block'; welcome.style.display = 'none';
@@ -117,15 +125,19 @@
             el.classList.add('nav-active');
         }
 
-        // ХАБАРНИ БОТГА ЮБОРИШ ФУНКЦИЯСИ
+        // БОТГА МУРОЖААТ ЮБОРИШ
         function sendToBot() {
             const name = document.getElementById('parentName').value;
             const msg = document.getElementById('parentMsg').value;
-            if(!name || !msg) { alert("Илтимос, ҳамма жойни тўлдиринг!"); return; }
+            
+            if(!name || !msg) { 
+                alert("Илтимос, исмингиз ва хабарингизни тўлиқ ёзинг!"); 
+                return; 
+            }
 
             const text = `🚀 ЯНГИ МУРОЖААТ:\n\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`;
             
-            // Телеграмга хабар юбориш
+            // Телеграм интерфейси орқали хабар юбориш
             window.Telegram.WebApp.sendData(text); 
             alert("Хабарингиз юборилди! Раҳмат.");
             window.Telegram.WebApp.close();
