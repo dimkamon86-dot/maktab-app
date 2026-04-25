@@ -131,23 +131,14 @@
     const msg = document.getElementById('parentMsg').value;
     
     if(!name || !msg) { 
-        alert("Илтимос, исмингиз ва хабарингизни ёзинг!"); 
+        alert("Илтимос, исмингиз ва хабарингизни тўлиқ ёзинг!"); 
         return; 
     }
 
-    const text = `🚀 ЯНГИ МУРОЖААТ:\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`;
+    // Хабар матнини тайёрлаш
+    const rawText = `🚀 ЯНГИ МУРОЖААТ:\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`;
+    const encodedText = encodeURIComponent(rawText);
     
-    // Телеграм иловаси (Web App) ичида эканимизни текшириш
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.sendData) {
-        try {
-            window.Telegram.WebApp.sendData(text); 
-            alert("Раҳмат! Хабарингиз юборилди.");
-            window.Telegram.WebApp.close(); 
-        } catch (e) {
-            alert("Хатолик: Бот хабарни қабул қилолмади. Иловани меню тугмаси орқали очинг.");
-        }
-    } else {
-        // Агар илова оддий браузерда очилган бўлса (Бот ичида эмас)
-        alert("Илова бот ичида очилмаган. Хабар юбориш учун ботдаги тугмани босинг.");
-    }
+    // Ботга тайёр матн билан йўналтириш (100% ишлайдиган усул)
+    window.open(`https://t.me/ibnsino_jizzax_bot?text=${encodedText}`, '_blank');
 }
