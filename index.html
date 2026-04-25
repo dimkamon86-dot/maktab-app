@@ -126,25 +126,28 @@
         }
 
         // БОТГА МУРОЖААТ ЮБОРИШ
-        function sendToBot() {
-            const name = document.getElementById('parentName').value;
-            const msg = document.getElementById('parentMsg').value;
-            
-            if(!name || !msg) { 
-                alert("Илтимос, исмингиз ва хабарингизни тўлиқ ёзинг!"); 
-                return; 
-            }
+       function sendToBot() {
+    const name = document.getElementById('parentName').value;
+    const msg = document.getElementById('parentMsg').value;
+    
+    if(!name || !msg) { 
+        alert("Илтимос, исмингиз ва хабарингизни ёзинг!"); 
+        return; 
+    }
 
-            const text = `🚀 ЯНГИ МУРОЖААТ:\n\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`;
-            
-            // Телеграм интерфейси орқали хабар юбориш
+    const text = `🚀 ЯНГИ МУРОЖААТ:\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`;
+    
+    // Телеграм иловаси (Web App) ичида эканимизни текшириш
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.sendData) {
+        try {
             window.Telegram.WebApp.sendData(text); 
-            alert("Хабарингиз юборилди! Раҳмат.");
-            window.Telegram.WebApp.close();
+            alert("Раҳмат! Хабарингиз юборилди.");
+            window.Telegram.WebApp.close(); 
+        } catch (e) {
+            alert("Хатолик: Бот хабарни қабул қилолмади. Иловани меню тугмаси орқали очинг.");
         }
-
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-    </script>
-</body>
-</html>
+    } else {
+        // Агар илова оддий браузерда очилган бўлса (Бот ичида эмас)
+        alert("Илова бот ичида очилмаган. Хабар юбориш учун ботдаги тугмани босинг.");
+    }
+}
