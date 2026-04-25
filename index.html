@@ -6,36 +6,32 @@
     <title>Ibn Sino Jizzax</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Асосий стиллар */
-        body { font-family: sans-serif; background: #f0f4f8; margin: 0; padding: 0; padding-bottom: 80px; }
+        body { font-family: sans-serif; background: #f0f4f8; margin: 0; padding: 0; padding-bottom: 90px; }
         .header { background: #003366; color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid #d4af37; }
         .school-logo { width: 70px; height: 70px; border-radius: 50%; background: white; border: 2px solid #d4af37; }
         
         .container { padding: 15px; }
-        .section { display: none; }
-        .active { display: block; }
-
+        .section { display: none; } /* Ҳаммаси бошида ёпиқ бўлади */
+        
         .card { background: white; border-radius: 15px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
+        input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; }
 
         /* Алоқа тугмалари */
         .btn-link { 
             display: block; width: 100%; padding: 15px; margin-bottom: 10px; 
-            border-radius: 12px; border: none; font-weight: bold; font-size: 16px; 
+            border-radius: 12px; font-weight: bold; font-size: 16px; 
             text-align: center; text-decoration: none; color: white; box-sizing: border-box;
         }
-        .bg-tg { background: #0088cc; }
-        .bg-tel { background: #28a745; }
 
-        /* Пастки меню */
+        /* Пастки меню - Энг муҳим қисми */
         .nav-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
             background: white; display: flex; justify-content: space-around; 
-            padding: 10px 0; border-top: 1px solid #ddd; z-index: 9999;
+            padding: 12px 0; border-top: 1px solid #ddd; z-index: 99999;
         }
-        .nav-item { text-align: center; flex: 1; color: #777; font-size: 12px; cursor: pointer; }
+        .nav-item { text-align: center; flex: 1; color: #777; font-size: 11px; cursor: pointer; border: none; background: none; outline: none; }
         .nav-active { color: #003366; font-weight: bold; }
-        .nav-icon { font-size: 20px; display: block; }
+        .nav-icon { font-size: 22px; display: block; margin-bottom: 2px; }
 
         .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 10px; margin-top: 10px; overflow: hidden; }
     </style>
@@ -48,27 +44,21 @@
     </div>
 
     <div class="container">
-        <div id="home" class="section active">
+        <div id="home" class="section" style="display: block;">
             <div class="card">
-                <input type="text" id="studentSearch" placeholder="Исмни ёзинг (Масалан: Алишер)" oninput="searchStudent()">
+                <input type="text" id="studentSearch" placeholder="Исмни ёзинг..." oninput="searchStudent()">
             </div>
-            
             <div id="studentCard" class="card" style="display:none;">
                 <h3 id="sName" style="margin:0; color:#003366"></h3>
                 <p id="sReport" style="margin:10px 0; color:#333;"></p>
-                <div class="video-box">
-                    <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
-                </div>
+                <div class="video-box"><iframe id="sVideo" width="100%" height="100%" frameborder="0"></iframe></div>
             </div>
-
-            <div id="welcome" style="text-align:center; color:#888; margin-top:40px;">
-                <p>🔍 Ўқувчи маълумотини топиш учун исмини ёзинг.</p>
-            </div>
+            <div id="welcome" style="text-align:center; color:#888; margin-top:40px;">🔍 Исмни ёзиб қидиринг.</div>
         </div>
 
         <div id="teachers" class="section">
             <div class="card">
-                <h3 style="color:#003366">Бизнинг устозлар</h3>
+                <h3>Бизнинг устозлар</h3>
                 <p>• Мухайё Каримова (Биология)</p>
                 <p>• Ҳилола Ўктамовна (Математика)</p>
                 <p>• Аҳмадов Ижод (Директор ўринбосари)</p>
@@ -77,68 +67,73 @@
 
         <div id="feedback" class="section">
             <div class="card">
-                <h3 style="color:#003366">Биз билан боғланиш</h3>
-                <p style="color:#666; font-size:14px; margin-bottom:15px;">Савол ва таклифлар бўлса, маъмурият билан боғланинг:</p>
-                
-                <a href="https://t.me/ibnsino_jizzax_bot" class="btn-link bg-tg">🔵 Telegram орқали ёзиш</a>
-                <a href="tel:+998901234567" class="btn-link bg-tel">📞 Қўнғироқ (Рақам 1)</a>
-                <a href="tel:+998912345678" class="btn-link bg-tel">📞 Қўнғироқ (Рақам 2)</a>
+                <h3>Алоқа ва Мурожаат</h3>
+                <a href="https://t.me/ibnsino_jizzax_bot" class="btn-link" style="background: #0088cc;">🔵 Telegram орқали ёзиш</a>
+                <a href="tel:+998901234567" class="btn-link" style="background: #28a745;">📞 Алоқа: +998 90 123 45 67</a>
+                <a href="tel:+998912345678" class="btn-link" style="background: #28a745;">📞 Алоқа: +998 91 234 56 78</a>
             </div>
         </div>
 
         <div id="thanks" class="section">
             <div class="card">
-                <h3 style="color:#003366">Миннатдорчиликлар</h3>
-                <p><i>"Инновацион мактаб учун раҳмат!"</i> - Ота-оналар номидан.</p>
+                <h3>Миннатдорчиликлар</h3>
+                <p><i>"Мактаб тизими аъло даражада!"</i> - Ота-оналар.</p>
             </div>
         </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item nav-active" id="nav-home" onclick="showTab('home', 'nav-home')">
+        <div class="nav-item nav-active" id="n1" onclick="changeSection('home', 'n1')">
             <span class="nav-icon">🏠</span>Асосий
         </div>
-        <div class="nav-item" id="nav-teachers" onclick="showTab('teachers', 'nav-teachers')">
+        <div class="nav-item" id="n2" onclick="changeSection('teachers', 'n2')">
             <span class="nav-icon">👨‍🏫</span>Устозлар
         </div>
-        <div id="nav-feedback" class="nav-item" onclick="showTab('feedback', 'nav-feedback')">
+        <div class="nav-item" id="n3" onclick="changeSection('feedback', 'n3')">
             <span class="nav-icon">📞</span>Мурожаат
         </div>
-        <div id="nav-thanks" class="nav-item" onclick="showTab('thanks', 'nav-thanks')">
+        <div class="nav-item" id="n4" onclick="changeSection('thanks', 'n4')">
             <span class="nav-icon">❤️</span>Раҳмат
         </div>
     </div>
 
     <script>
         const students = [
-            { 
-                key: "alisher", 
-                fullName: "АЛИШЕР СОБИРОВ", 
-                report: "Фарзандингиз математикадан аъло баҳо олди!", 
-                video: "https://www.youtube.com/embed/dQw4w9WgXcQ" 
-            }
+            { key: "alisher", name: "АЛИШЕР СОБИРОВ", msg: "Математикадан аъло баҳо!", vid: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
         ];
 
         function searchStudent() {
-            let input = document.getElementById('studentSearch').value.toLowerCase().trim();
-            let card = document.getElementById('studentCard');
-            let welcome = document.getElementById('welcome');
-            let result = students.find(s => s.key.includes(input) || s.fullName.toLowerCase().includes(input));
-            
-            if (input.length > 0 && result) {
-                card.style.display = 'block';
-                welcome.style.display = 'none';
-                document.getElementById('sName').innerText = result.fullName;
-                document.getElementById('sReport').innerText = result.report;
-                document.getElementById('sVideo').src = result.video;
+            var val = document.getElementById('studentSearch').value.toLowerCase().trim();
+            var res = students.find(s => s.key.includes(val) || s.name.toLowerCase().includes(val));
+            if (val.length > 0 && res) {
+                document.getElementById('studentCard').style.display = 'block';
+                document.getElementById('welcome').style.display = 'none';
+                document.getElementById('sName').innerText = res.name;
+                document.getElementById('sReport').innerText = res.msg;
+                document.getElementById('sVideo').src = res.vid;
             } else {
-                card.style.display = 'none';
-                welcome.style.display = 'block';
+                document.getElementById('studentCard').style.display = 'none';
+                document.getElementById('welcome').style.display = 'block';
             }
         }
 
-        function showTab(sectionId, navId) {
-            // Секцияларни яшириш
-            let sections = document.getElementsByClassName('section');
-            for (let i = 0; i < sections.length; i++) {
-                sections
+        function changeSection(secId, navId) {
+            // Ҳамма секцияларни ёпиш
+            var s = document.getElementsByClassName('section');
+            for (var i = 0; i < s.length; i++) { s[i].style.display = 'none'; }
+            
+            // Танланганни очиш
+            document.getElementById(secId).style.display = 'block';
+            
+            // Меню рангини ўзгартириш
+            var n = document.getElementsByClassName('nav-item');
+            for (var j = 0; j < n.length; j++) { n[j].classList.remove('nav-active'); }
+            document.getElementById(navId).classList.add('nav-active');
+            
+            window.scrollTo(0,0);
+        }
+
+        window.Telegram.WebApp.expand();
+    </script>
+</body>
+</html>
