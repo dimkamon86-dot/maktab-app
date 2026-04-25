@@ -6,128 +6,101 @@
     <title>Ibn Sino Jizzax</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { --main-blue: #003366; --gold: #d4af37; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f4f8; margin: 0; padding: 0; overflow-x: hidden; }
+        :root { --blue: #003366; --gold: #d4af37; --light: #f8f9fa; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #eef2f5; margin: 0; padding: 0; -webkit-user-select: none; }
         
-        /* Header */
-        .header { background: var(--main-blue); color: white; padding: 25px 15px; text-align: center; border-radius: 0 0 30px 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .school-logo { width: 75px; height: 75px; border-radius: 50%; border: 3px solid var(--gold); background: white; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-        .header h4 { margin: 5px 0; font-size: 18px; letter-spacing: 0.5px; }
+        .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-radius: 0 0 25px 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .school-logo { width: 75px; height: 75px; border-radius: 50%; border: 3px solid var(--gold); background: white; object-fit: cover; }
 
-        .container { padding: 20px 15px 100px 15px; }
-        .section { display: none; min-height: 300px; }
-        .active { display: block; animation: slideUp 0.4s ease; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .container { padding: 15px; padding-bottom: 110px; }
+        .section { display: none; }
+        .active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Cards */
-        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); margin-bottom: 20px; border: 1px solid #e1e8ed; }
-        input, textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1.5px solid #d1d9e0; margin-top: 10px; box-sizing: border-box; font-size: 16px; transition: 0.3s; }
-        input:focus { border-color: var(--main-blue); outline: none; box-shadow: 0 0 0 3px rgba(0,51,102,0.1); }
+        .card { background: white; border-radius: 18px; padding: 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
+        input, textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ced4da; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
+        input:focus { border-color: var(--blue); }
 
-        /* Search Results */
-        .video-wrapper { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 15px; overflow: hidden; margin: 15px 0; }
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; margin-top: 15px; }
         
-        /* Floating Navigation Bar */
+        /* ПАСТКИ МЕНЮ - ФИКСИРОВАННИЙ */
         .nav-bar { 
-            position: fixed; bottom: 20px; left: 15px; right: 15px; 
-            background: rgba(255, 255, 255, 0.95); 
-            display: flex; justify-content: space-around; align-items: center;
-            padding: 12px 5px; border-radius: 25px; 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15); 
-            backdrop-filter: blur(10px); z-index: 1000;
-            border: 1px solid rgba(255,255,255,0.3);
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: white; display: flex; justify-content: space-around; 
+            padding: 12px 5px; border-top: 1px solid #ddd;
+            z-index: 10000; box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
         }
-        .nav-item { text-align: center; color: #6e7c87; cursor: pointer; flex: 1; transition: 0.3s; -webkit-tap-highlight-color: transparent; }
-        .nav-icon { font-size: 22px; display: block; margin-bottom: 4px; }
-        .nav-text { font-size: 11px; font-weight: 600; }
-        .nav-active { color: var(--main-blue); transform: translateY(-5px); }
-        .nav-active .nav-icon { filter: drop-shadow(0 2px 4px rgba(0,51,102,0.3)); }
+        .nav-item { text-align: center; flex: 1; cursor: pointer; color: #8e9aaf; transition: 0.2s; }
+        .nav-active { color: var(--blue); font-weight: bold; }
+        .nav-icon { font-size: 24px; display: block; margin-bottom: 2px; }
+        .nav-text { font-size: 11px; }
 
-        /* Teachers & Thanks */
-        .teacher-row { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-        .teacher-circle { width: 48px; height: 48px; border-radius: 50%; background: #e8efff; color: var(--main-blue); display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; }
-        .btn-action { background: #28a745; color: white; border: none; padding: 16px; border-radius: 14px; width: 100%; margin-top: 15px; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 12px rgba(40,167,69,0.2); }
+        .btn-send { background: #28a745; color: white; border: none; padding: 16px; border-radius: 12px; width: 100%; margin-top: 15px; font-weight: bold; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo" alt="Maktab Logo">
-        <h4>Abu Ali ibn Sino Jizzax</h4>
+        <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo" alt="Logo">
+        <h4 style="margin:8px 0 0 0">Abu Ali ibn Sino Jizzax</h4>
     </div>
 
     <div class="container">
         <div id="home" class="section active">
             <div class="card">
-                <input type="text" id="studentSearch" placeholder="Ўқувчи исми (Лотин/Крилл)..." onkeyup="searchStudent()">
+                <input type="text" id="studentSearch" placeholder="Исмни ёзинг (Масалан: Алишер)..." oninput="searchStudent()">
             </div>
             
             <div id="studentCard" class="card" style="display:none;">
-                <h3 id="sName" style="margin:0; color:var(--main-blue)"></h3>
-                <p id="sReport" style="font-size:14px; color:#555; line-height:1.5; margin:10px 0;"></p>
-                <div class="video-wrapper">
+                <h3 id="sName" style="margin:0; color:var(--blue)"></h3>
+                <p id="sReport" style="font-size:15px; color:#444; margin:12px 0; line-height:1.4;"></p>
+                <div class="video-box">
                     <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div id="welcomeArea" style="text-align:center; padding:40px 20px; color:#8e9aaf;">
-                <span style="font-size: 40px; display: block; margin-bottom: 10px;">🔍</span>
-                <b>Қидирув тизими</b><br>Фарзандингиз маълумотларини топиш учун исмини киритинг
+            <div id="welcome" style="text-align:center; padding:50px 20px; color:#adb5bd;">
+                <span style="font-size:40px;">🔍</span><br>
+                <b>Қидирув тизими</b><br>Ўқувчи маълумотини топиш учун исмини киритинг
             </div>
         </div>
 
         <div id="teachers" class="section">
-            <h3 style="color:var(--main-blue); padding-left:5px;">Бизнинг устозлар</h3>
+            <h3 style="color:var(--blue); margin-left:10px;">Бизнинг устозлар</h3>
             <div class="card">
-                <div class="teacher-row">
-                    <div class="teacher-circle">MK</div>
-                    <div><b>Мухайё Каримова</b><br><small style="color:#777">Биология ўқитувчиси</small></div>
-                </div>
-                <div class="teacher-row">
-                    <div class="teacher-circle">HU</div>
-                    <div><b>Ҳилола Ўктамовна</b><br><small style="color:#777">Математика ўқитувчиси</small></div>
-                </div>
-                <div class="teacher-row" style="border:none">
-                    <div class="teacher-circle">AI</div>
-                    <div><b>Аҳмадов Ижод</b><br><small style="color:#777">Директор ўринбосари</small></div>
-                </div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee;"><b>Мухайё Каримова</b> - Биология</div>
+                <div style="padding:10px 0; border-bottom:1px solid #eee;"><b>Ҳилола Ўктамовна</b> - Математика</div>
+                <div style="padding:10px 0;"><b>Аҳмадов Ижод</b> - Директор ўринбосари</div>
             </div>
         </div>
 
         <div id="feedback" class="section">
-            <h3 style="color:var(--main-blue); padding-left:5px;">Мурожаат йўллаш</h3>
+            <h3 style="color:var(--blue); margin-left:10px;">Мурожаат йўллаш</h3>
             <div class="card">
-                <p style="font-size:13px; color:#666; margin-bottom:15px;">Сизнинг фикр ва таклифларингиз биз учун муҳим.</p>
-                <input type="text" id="parentName" placeholder="Исмингиз">
-                <textarea id="parentMsg" rows="4" placeholder="Хабар матни..."></textarea>
-                <button class="btn-action" onclick="sendToBot()">ХАБАРНИ ЮБОРИШ</button>
+                <input type="text" id="pName" placeholder="Исмингиз">
+                <textarea id="pMsg" rows="4" placeholder="Хабар матни..."></textarea>
+                <button class="btn-send" onclick="sendToBot()">ЮБОРИШ</button>
             </div>
         </div>
 
         <div id="thanks" class="section">
-            <h3 style="color:var(--main-blue); padding-left:5px;">Миннатдорчиликлар</h3>
-            <div class="card" style="border-left: 5px solid var(--gold); background: #fffdf5;">
-                <p style="font-style:italic; margin:0;">"АИ технологияларнинг мактабда қўлланилиши фарзандларимиз келажаги учун катта қадам."</p>
-                <p style="text-align:right; margin:10px 0 0 0; color:var(--main-blue); font-weight:bold;">— Бахтиёр ака</p>
-            </div>
-            <div class="card" style="border-left: 5px solid var(--gold); background: #fffdf5;">
-                <p style="font-style:italic; margin:0;">"Устозларнинг профессионаллиги ва мактабдаги тартиб-интизом бизни хурсанд қилади."</p>
-                <p style="text-align:right; margin:10px 0 0 0; color:var(--main-blue); font-weight:bold;">— Шохида опа</p>
-            </div>
+            <h3 style="color:var(--blue); margin-left:10px;">Миннатдорчиликлар</h3>
+            <div class="card" style="border-left:5px solid var(--gold);">"Мактаб жамоасига раҳмат!" - Бахтиёр ака</div>
+            <div class="card" style="border-left:5px solid var(--gold); margin-top:10px;">"Инновациялар учун ташаккур!" - Шохида опа</div>
         </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item nav-active" id="btn-home" onclick="switchTab('home', this)">
+        <div class="nav-item nav-active" onclick="switchTab('home', this)">
             <span class="nav-icon">🏠</span><span class="nav-text">Асосий</span>
         </div>
-        <div class="nav-item" id="btn-teachers" onclick="switchTab('teachers', this)">
+        <div class="nav-item" onclick="switchTab('teachers', this)">
             <span class="nav-icon">👨‍🏫</span><span class="nav-text">Устозлар</span>
         </div>
-        <div class="nav-item" id="btn-feedback" onclick="switchTab('feedback', this)">
+        <div class="nav-item" onclick="switchTab('feedback', this)">
             <span class="nav-icon">✉️</span><span class="nav-text">Мурожаат</span>
         </div>
-        <div class="nav-item" id="btn-thanks" onclick="switchTab('thanks', this)">
+        <div class="nav-item" onclick="switchTab('thanks', this)">
             <span class="nav-icon">❤️</span><span class="nav-text">Раҳмат</span>
         </div>
     </div>
@@ -135,47 +108,50 @@
     <script>
         const students = [
             { 
-                name: "Alisher Sobirov", 
-                nameKiril: "Алишер Собиров", 
-                report: "Математикадан аъло баҳо! Chorak якуни бўйича энг фаол ўқувчилардан бири.", 
+                name: "alisher sobirov", 
+                nameKiril: "алишер собиров", 
+                report: "Алишер математика ва кимё фанларидан жуда яхши натижа кўрсатди!", 
                 video: "https://www.youtube.com/embed/dQw4w9WgXcQ" 
             }
         ];
 
-        function switchTab(tabId, element) {
-            // Секцияларни яшириш
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            // Танланганни кўрсатиш
-            document.getElementById(tabId).classList.add('active');
-            
-            // Тугма стилларини янгилаш
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('nav-active'));
-            element.classList.add('nav-active');
-            
-            // Тепага қайтариш
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
         function searchStudent() {
-            let input = document.getElementById('studentSearch').value.toLowerCase();
+            let input = document.getElementById('studentSearch').value.toLowerCase().trim();
             let card = document.getElementById('studentCard');
-            let welcome = document.getElementById('welcomeArea');
+            let welcome = document.getElementById('welcome');
             
-            let result = students.find(s => s.name.toLowerCase().includes(input) || s.nameKiril.toLowerCase().includes(input));
+            let result = students.find(s => s.name.includes(input) || s.nameKiril.includes(input));
             
-            if (input.length > 2 && result) {
-                card.style.display = 'block'; welcome.style.display = 'none';
-                document.getElementById('sName').innerText = result.nameKiril;
+            if (input.length >= 3 && result) {
+                card.style.display = 'block';
+                welcome.style.display = 'none';
+                document.getElementById('sName').innerText = result.nameKiril.toUpperCase();
                 document.getElementById('sReport').innerText = result.report;
                 document.getElementById('sVideo').src = result.video;
-            } else { 
-                card.style.display = 'none'; welcome.style.display = 'block'; 
+            } else {
+                card.style.display = 'none';
+                welcome.style.display = 'block';
             }
         }
 
+        function switchTab(id, el) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('nav-active'));
+            el.classList.add('nav-active');
+            window.scrollTo(0,0);
+        }
+
         function sendToBot() {
-            const name = document.getElementById('parentName').value;
-            const msg = document.getElementById('parentMsg').value;
-            if(!name || !msg) { alert("Илтимос, маълумотларни тўлиқ киритинг!"); return; }
+            const name = document.getElementById('pName').value;
+            const msg = document.getElementById('pMsg').value;
+            if(!name || !msg) { alert("Илтимос, маълумотни тўлдиринг!"); return; }
             const text = encodeURIComponent(`🚀 ЯНГИ МУРОЖААТ:\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`);
-            window.open(`
+            window.open(`https://t.me/ibnsino_jizzax_bot?text=${text}`, '_blank');
+        }
+
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+    </script>
+</body>
+</html>
