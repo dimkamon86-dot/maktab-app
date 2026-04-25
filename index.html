@@ -6,35 +6,22 @@
     <title>Ibn Sino Jizzax</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root { --blue: #003366; --gold: #d4af37; --light: #f8f9fa; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #eef2f5; margin: 0; padding: 0; -webkit-user-select: none; }
-        
-        .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-radius: 0 0 25px 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .school-logo { width: 75px; height: 75px; border-radius: 50%; border: 3px solid var(--gold); background: white; object-fit: cover; }
-
+        :root { --blue: #003366; --gold: #d4af37; }
+        body { font-family: sans-serif; background: #f0f4f8; margin: 0; padding: 0; }
+        .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-radius: 0 0 25px 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .school-logo { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--gold); background: white; object-fit: cover; }
         .container { padding: 15px; padding-bottom: 110px; }
         .section { display: none; }
-        .active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { background: white; border-radius: 18px; padding: 18px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
-        input, textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ced4da; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
-        input:focus { border-color: var(--blue); }
-
+        .active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: white; border-radius: 15px; padding: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 15px; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; margin-top: 10px; outline: none; }
         .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; margin-top: 15px; }
-        
-        /* ПАСТКИ МЕНЮ - ФИКСИРОВАННИЙ */
-        .nav-bar { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: white; display: flex; justify-content: space-around; 
-            padding: 12px 5px; border-top: 1px solid #ddd;
-            z-index: 10000; box-shadow: 0 -3px 15px rgba(0,0,0,0.1);
-        }
-        .nav-item { text-align: center; flex: 1; cursor: pointer; color: #8e9aaf; transition: 0.2s; }
+        .nav-bar { position: fixed; bottom: 15px; left: 10px; right: 10px; background: white; display: flex; justify-content: space-around; padding: 10px; border-radius: 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); z-index: 10000; }
+        .nav-item { text-align: center; flex: 1; cursor: pointer; color: #777; -webkit-tap-highlight-color: transparent; }
         .nav-active { color: var(--blue); font-weight: bold; }
-        .nav-icon { font-size: 24px; display: block; margin-bottom: 2px; }
-        .nav-text { font-size: 11px; }
-
+        .nav-icon { font-size: 22px; display: block; }
+        .nav-text { font-size: 10px; }
         .btn-send { background: #28a745; color: white; border: none; padding: 16px; border-radius: 12px; width: 100%; margin-top: 15px; font-weight: bold; font-size: 16px; cursor: pointer; }
     </style>
 </head>
@@ -42,7 +29,7 @@
 
     <div class="header">
         <img src="photo_2026-02-13_08-43-51.jpg" class="school-logo" alt="Logo">
-        <h4 style="margin:8px 0 0 0">Abu Ali ibn Sino Jizzax</h4>
+        <h4 style="margin:5px 0">Abu Ali ibn Sino Jizzax</h4>
     </div>
 
     <div class="container">
@@ -50,27 +37,24 @@
             <div class="card">
                 <input type="text" id="studentSearch" placeholder="Исмни ёзинг (Масалан: Алишер)..." oninput="searchStudent()">
             </div>
-            
             <div id="studentCard" class="card" style="display:none;">
                 <h3 id="sName" style="margin:0; color:var(--blue)"></h3>
-                <p id="sReport" style="font-size:15px; color:#444; margin:12px 0; line-height:1.4;"></p>
+                <p id="sReport" style="font-size:15px; color:#333; margin:12px 0; line-height:1.4;"></p>
                 <div class="video-box">
                     <iframe id="sVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
-
-            <div id="welcome" style="text-align:center; padding:50px 20px; color:#adb5bd;">
-                <span style="font-size:40px;">🔍</span><br>
-                <b>Қидирув тизими</b><br>Ўқувчи маълумотини топиш учун исмини киритинг
+            <div id="welcome" style="text-align:center; padding:40px 20px; color:#888;">
+                <span style="font-size:40px;">🔍</span><br><b>Қидирув тизими</b><br>Ўқувчи маълумотини топиш учун исмини киритинг
             </div>
         </div>
 
         <div id="teachers" class="section">
             <h3 style="color:var(--blue); margin-left:10px;">Бизнинг устозлар</h3>
             <div class="card">
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><b>Мухайё Каримова</b> - Биология</div>
-                <div style="padding:10px 0; border-bottom:1px solid #eee;"><b>Ҳилола Ўктамовна</b> - Математика</div>
-                <div style="padding:10px 0;"><b>Аҳмадов Ижод</b> - Директор ўринбосари</div>
+                <p style="padding:8px 0; border-bottom:1px solid #eee;"><b>Мухайё Каримова</b> - Биология</p>
+                <p style="padding:8px 0; border-bottom:1px solid #eee;"><b>Ҳилола Ўктамовна</b> - Математика</p>
+                <p style="padding:8px 0;"><b>Аҳмадов Ижод</b> - Директор ўринбосари</p>
             </div>
         </div>
 
@@ -78,8 +62,8 @@
             <h3 style="color:var(--blue); margin-left:10px;">Мурожаат йўллаш</h3>
             <div class="card">
                 <input type="text" id="pName" placeholder="Исмингиз">
-                <textarea id="pMsg" rows="4" placeholder="Хабар матни..."></textarea>
-                <button class="btn-send" onclick="sendToBot()">ЮБОРИШ</button>
+                <textarea id="pMsg" rows="4" placeholder="Хабар матни ёки таклифингиз..."></textarea>
+                <button class="btn-send" onclick="sendToBot()">ЛИЧКАГА ЮБОРИШ</button>
             </div>
         </div>
 
@@ -110,7 +94,7 @@
             { 
                 name: "alisher sobirov", 
                 nameKiril: "алишер собиров", 
-                report: "Алишер математика ва кимё фанларидан жуда яхши натижа кўрсатди!", 
+                report: "Алишер математикадан жуда яхши натижа кўрсатди!", 
                 video: "https://www.youtube.com/embed/dQw4w9WgXcQ" 
             }
         ];
@@ -119,19 +103,13 @@
             let input = document.getElementById('studentSearch').value.toLowerCase().trim();
             let card = document.getElementById('studentCard');
             let welcome = document.getElementById('welcome');
-            
             let result = students.find(s => s.name.includes(input) || s.nameKiril.includes(input));
-            
             if (input.length >= 3 && result) {
-                card.style.display = 'block';
-                welcome.style.display = 'none';
+                card.style.display = 'block'; welcome.style.display = 'none';
                 document.getElementById('sName').innerText = result.nameKiril.toUpperCase();
                 document.getElementById('sReport').innerText = result.report;
                 document.getElementById('sVideo').src = result.video;
-            } else {
-                card.style.display = 'none';
-                welcome.style.display = 'block';
-            }
+            } else { card.style.display = 'none'; welcome.style.display = 'block'; }
         }
 
         function switchTab(id, el) {
@@ -145,9 +123,14 @@
         function sendToBot() {
             const name = document.getElementById('pName').value;
             const msg = document.getElementById('pMsg').value;
-            if(!name || !msg) { alert("Илтимос, маълумотни тўлдиринг!"); return; }
-            const text = encodeURIComponent(`🚀 ЯНГИ МУРОЖААТ:\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`);
-            window.open(`https://t.me/ibnsino_jizzax_bot?text=${text}`, '_blank');
+            if(!name || !msg) { alert("Илтимос, исмингиз ва хабарингизни ёзинг!"); return; }
+            
+            // ХАБАР МАТНИ ВА ЙЎНАЛТИРИШ
+            const rawText = `🚀 ЯНГИ МУРОЖААТ:\n👤 Кимдан: ${name}\n📝 Хабар: ${msg}`;
+            const encodedText = encodeURIComponent(rawText);
+            
+            // БОТГА ЎТКАЗИШ (Ота-она фақат 'юбориш'ни босади)
+            window.open(`https://t.me/ibnsino_jizzax_bot?text=${encodedText}`, '_blank');
         }
 
         let tg = window.Telegram.WebApp;
