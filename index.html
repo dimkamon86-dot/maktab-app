@@ -21,18 +21,30 @@
         .t-icon { width: 45px; height: 45px; border-radius: 50%; background: #eee; border: 1px solid #ddd; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .t-icon img { width: 100%; height: 100%; object-fit: cover; }
         .res-box { display:none; margin-top:15px; background:#eef7ff; padding:15px; border-radius:12px; border-left: 5px solid var(--blue); }
+        
+        /* AI Chat Box Styles */
         #chat-window { height: 160px; overflow-y: auto; background: #f9f9f9; border-radius: 10px; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; font-size: 13px; display: flex; flex-direction: column; gap: 8px; }
-        .msg { padding: 8px 12px; border-radius: 15px; max-width: 85%; }
-        .ai-msg { background: #e1f5fe; color: #01579b; align-self: flex-start; }
-        .user-msg { background: #e8f5e9; color: #2e7d32; align-self: flex-end; }
+        .msg { padding: 8px 12px; border-radius: 15px; max-width: 85%; line-height: 1.4; }
+        .ai-msg { background: #e1f5fe; color: #01579b; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .user-msg { background: #e8f5e9; color: #2e7d32; align-self: flex-end; border-bottom-right-radius: 2px; }
+        
+        /* Aloqa bo'limi uchun maxsus tugmalar */
+        .contact-btn { display: flex; align-items: center; gap: 12px; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-decoration: none; color: white; font-weight: bold; font-size: 15px; transition: 0.3s; }
+        .contact-btn i { font-size: 20px; }
+        .tg-btn { background: #0088cc; box-shadow: 0 4px 10px rgba(0,136,204,0.3); }
+        .call-btn { background: #28a745; box-shadow: 0 4px 10px rgba(40,167,69,0.3); }
+        .call-btn-alt { background: #34ce57; box-shadow: 0 4px 10px rgba(52,206,87,0.3); }
+
         .nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 500px; background: white; display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid #ddd; z-index: 10000; box-shadow: 0 -3px 10px rgba(0,0,0,0.05); }
         .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 10px; cursor: pointer; }
         .nav-active { color: var(--blue); font-weight: bold; }
         .nav-icon { font-size: 22px; display: block; margin-bottom: 3px; }
+
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
         .modal-content { background: white; margin: 15% auto; padding: 25px; border-radius: 30px; width: 80%; max-width: 350px; text-align: center; position: relative; }
         .m-photo { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--gold); margin-bottom: 15px; object-fit: cover; }
-        .btn-action { display: block; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 14px; border: none; cursor: pointer; text-decoration: none; }
+        
+        .btn-action { display: block; width: 100%; padding: 12px; border-radius: 12px; font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 14px; border: none; cursor: pointer; }
         input { width: 100%; padding: 12px; border-radius: 10px; border: 1.5px solid #ddd; box-sizing: border-box; outline: none; font-size: 15px; }
     </style>
 </head>
@@ -55,8 +67,8 @@
                 </div>
             </div>
             <div class="card">
-                <h4 class="card-title"><span>📰</span> Maktab Yangiliklari</h4>
-                <p style="font-size:13px; color:#444;">• Tahliliy tizim to'liq yangilandi.<br>• Yangi video darslar yuklandi.</p>
+                <h4 class="card-title"><span>📰</span> Yangiliklar</h4>
+                <p style="font-size:13px; color:#444;">• Tahliliy tizim to'liq ishga tushdi.<br>• Bog'lanish bo'limi yangilandi.</p>
             </div>
         </div>
 
@@ -70,18 +82,16 @@
         <div id="sec-edu" class="section">
             <div class="card">
                 <h4 class="card-title"><span>📚</span> Imtihon va Testlar</h4>
-                <div class="list-btn" onclick="alert('Biologiya testi yuklanmoqda...')"><span>Biologiya Testlari</span> <span>📝</span></div>
-                <div class="list-btn" onclick="alert('Matematika testi yuklanmoqda...')"><span>Matematika Testlari</span> <span>📝</span></div>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Biologiya Testlari</span> <span>📝</span></div>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Matematika Testlari</span> <span>📝</span></div>
             </div>
-            <div class="card" style="border-left: 5px solid var(--gold);">
-                <h4 class="card-title"><span>🏆</span> Zakovat Intellektual Klubi</h4>
-                <p style="font-size:13px;">Haftalik turnirlar jadvali va natijalar.</p>
-                <div class="list-btn" onclick="alert('Reyting: 1-o\'rin: 9-A sinf')"><span>Natijalarni ko'rish</span> <span>🥇</span></div>
+            <div class="card">
+                <h4 class="card-title"><span>🏆</span> Zakovat Klubi</h4>
+                <div class="list-btn" onclick="alert('Yaqinda...')"><span>Reyting va Natijalar</span> <span>🥇</span></div>
             </div>
             <div class="card">
                 <h4 class="card-title"><span>🎥</span> Video Darslar</h4>
-                <div class="list-btn" onclick="alert('Video yuklanmoqda...')"><span>Kimyo: Organik birikmalar</span> <span>▶️</span></div>
-                <div class="list-btn" onclick="alert('Video yuklanmoqda...')"><span>Biologiya: Hujayra tuzilishi</span> <span>▶️</span></div>
+                <div class="list-btn" onclick="alert('Yuklanmoqda...')"><span>Kimyo darslari</span> <span>▶️</span></div>
             </div>
         </div>
 
@@ -97,10 +107,21 @@
                 </div>
                 <button id="startAiBtn" onclick="initChat()" class="btn-action" style="background:var(--blue); color:white;">🤖 Suhbatni boshlash</button>
             </div>
+            
             <div class="card">
-                <h4 class="card-title"><span>🌐</span> Kontaktlar</h4>
-                <a href="https://t.me/Ibn_sino_IM_Jizzax" class="btn-action" style="background:#0088cc; color:white;">🔵 Maktab Kanali</a>
-                <a href="tel:+998997712288" class="btn-action" style="background:#28a745; color:white;">📞 Bog'lanish</a>
+                <h4 class="card-title"><span>🌐</span> Bog'lanish</h4>
+                <a href="https://t.me/Ibn_sino_IM_Jizzax" class="contact-btn tg-btn">
+                    <span>🔵 Maktab Kanali (Telegram)</span>
+                </a>
+                <a href="tel:+998997712288" class="contact-btn call-btn">
+                    <span>📞 +998 99 771 22 88</span>
+                </a>
+                <a href="tel:+998933053383" class="contact-btn call-btn-alt">
+                    <span>📞 +998 93 305 33 83</span>
+                </a>
+                <a href="https://t.me/K_Dilmurod" class="contact-btn tg-btn" style="background:#448aff;">
+                    <span>📩 Shaxsiy Murojaat</span>
+                </a>
             </div>
         </div>
     </div>
@@ -125,23 +146,18 @@
 
 <script>
     const staffData = [
-        { n: "Karimqulov Dilmurod Qurbonboyevich", p: "Maktab Direktori", i: "Tug'ilgan yili: 19.12.1986. Toifasi: Oliy. Ish staji: 20 yil.", img: "15.jpg" },
+        { n: "Karimqulov Dilmurod Qurbonboyevich", p: "Maktab Direktori", i: "Tug'ilgan yili: 19.12.1986. Yoshi: 39. Toifasi: Oliy. Ish staji: 20 yil.", img: "15.jpg" },
         { n: "Jo'rayeva Feruza Ismatovna", p: "O'TIBDO'", i: "Tug'ilgan yili: 1975. Toifasi: Ikkinchi. Ish staji: 31 yil.", img: "16.jpg" },
-        { n: "Ubaydullayev Sardorbek Safarbek o'g'li", p: "O'quv ishlari bo'yicha o'rinbosar", i: "Tug'ilgan: 1994. Toifasi: Oliy.", img: "17.jpg" },
+        { n: "Ubaydullayev Sardorbek Safarbek o'g'li", p: "O'quv ishlari bo'yicha o'rinbosar", i: "Tug'ilgan yili: 1994. Toifasi: Oliy.", img: "17.jpg" },
         { n: "Qosimov Avaz Donayevich", p: "XIBDO'", i: "Mutaxassisligi: Mexanik injener. Ish staji: 33 yil.", img: "18.jpg" }
     ];
 
-   const aiKnowledge = [
-        { keys: ["direktor", "rahbar", "dilmurod", "boshliq"], ans: "Maktab direktori - Karimqulov Dilmurod Qurbonboyevich. Qabul kunlari: Dushanba-Juma, 09:00-17:00." },
-        { keys: ["manzil", "joy", "qayerda", "lokatsiya"], ans: "Maktabimiz Jizzax shahrida жойлашган. Батафсил манзил учун маъмурият билан боғланинг." },
-        { keys: ["zakovat", "tanlov", "o'yin", "turnir"], ans: "Zakovat intellektual o'yinlari har hafta juma kuni soat 15:00 da faollar zalida o'tkaziladi." },
-        { keys: ["forma", "kiyim", "maktab formasi"], ans: "Maktabimizda оқ кўйлак ва тўқ кўк шим (юбка) классик формаси амал қилади." },
-        { keys: ["imtihon", "test", "nazorat"], ans: "Choraklik imtihonlar va testlar jadvalini 'Ta'lim' bo'limidan ko'rishingiz mumkin." },
-        { keys: ["video", "dars", "youtube"], ans: "Video darslarimiz 'Ta'lim' bo'limiga joylangan, у ерда кимё ва биологиядан қизиқарли дарслар бор." },
-        { keys: ["aloqa", "telefon", "nomer"], ans: "Maktab raqamlari: +998 99 771 22 88 ёки +998 93 305 33 83." },
-        { keys: ["salom", "assalom", "hello", "qalaysiz"], ans: "Vaalaykum assalom! Men Ibn Sino AI yordamchisiman. Sizga qanday yordam bera olaman?" }
-       
-        ];
+    const aiKnowledge = [
+        { keys: ["direktor", "rahbar", "dilmurod"], ans: "Maktab direktori - Karimqulov Dilmurod Qurbonboyevich." },
+        { keys: ["zakovat", "tanlov", "o'yin"], ans: "Zakovat intellektual o'yinlari har juma 15:00 da o'tkaziladi." },
+        { keys: ["salom", "assalom", "qalaysiz"], ans: "Vaalaykum assalom! Men Ibn Sino maktabining AI yordamchisiman." },
+        { keys: ["nomer", "tel", "raqam"], ans: "Maktab raqamlari: +998 99 771 22 88 va +998 93 305 33 83." }
+    ];
 
     function initChat() { document.getElementById('chat-container').style.display = 'block'; document.getElementById('startAiBtn').style.display = 'none'; }
 
@@ -152,7 +168,7 @@
         let win = document.getElementById('chat-window');
         win.innerHTML += `<div class="msg user-msg">${text}</div>`;
         input.value = '';
-        let response = "Ma'lumot topilmadi. Tez orada o'rganib olaman.";
+        let response = "Hozircha bu savolga javobim yo'q. Bazani boyitishda davom etmoqdamiz.";
         for(let item of aiKnowledge) { if(item.keys.some(k => text.includes(k))) { response = item.ans; break; } }
         setTimeout(() => { win.innerHTML += `<div class="msg ai-msg">${response}</div>`; win.scrollTop = win.scrollHeight; }, 600);
     }
@@ -164,7 +180,7 @@
             const item = document.createElement('div');
             item.className = 'list-btn';
             item.onclick = () => openM(s.n, s.p, s.i, s.img);
-            item.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div class="t-icon"><img src="${s.img}" onerror="this.src='photo_2026-02-13_08-43-51.jpg'"></div><div style="text-align:left;"><b>${s.n.split(' ')[0]} ${s.n.split(' ')[1]}</b><br><small>${s.p}</small></div></div><span>➡️</span>`;
+            item.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><div class="t-icon"><img src="${s.img}" onerror="this.src='photo_2026-02-13_08-43-51.jpg'"></div><div style="text-align:left;"><b>${s.n.split(' ')[0]} ${s.n.split(' ')[1]}</b><br><small style="color:#666;">${s.p}</small></div></div><span>➡️</span>`;
             list.appendChild(item);
         });
     }
@@ -187,15 +203,17 @@
     }
 
     function openM(n, p, i, rasm) {
-        document.getElementById('mn').innerText = n; document.getElementById('mp').innerText = p;
-        document.getElementById('minfo').innerHTML = i; document.getElementById('modal-img').src = rasm;
+        document.getElementById('mn').innerText = n;
+        document.getElementById('mp').innerText = p;
+        document.getElementById('minfo').innerHTML = i;
+        document.getElementById('modal-img').src = rasm;
         document.getElementById('tModal').style.display = 'block';
     }
 
     function closeM() { document.getElementById('tModal').style.display = 'none'; }
 
     renderStaff();
-    window.Telegram.WebApp.expand();
+    if(window.Telegram && window.Telegram.WebApp) window.Telegram.WebApp.expand();
 </script>
 </body>
 </html>
