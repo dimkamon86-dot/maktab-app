@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card"><h4 class="card-title">📰 Yangiliklar</h4><p style="font-size:13px;">• Tahlil tizimi va AI ёрдамчи тўлиқ ишламоқда.</p></div>
+            <div class="card"><h4 class="card-title">📰 Yangiliklar</h4><p style="font-size:13px;">• 6-A va 7-A sinf ma'lumotlari yuklandi.</p></div>
         </div>
 
         <div id="sec-staff" class="section">
@@ -70,13 +70,13 @@
                 <h4 class="card-title">📚 Ta'lim va Imtihonlar</h4>
                 <div class="list-btn" onclick="alert('Tez orada...')"><span>Biologiya Testlar</span> <span>📝</span></div>
                 <div class="list-btn" onclick="alert('Tez orada...')"><span>Kimyo Video darslar</span> <span>▶️</span></div>
-                <div class="list-btn" onclick="alert('Hafta juma kuni 15:00 da')"><span>Zakovat Natijalari</span> <span>🏆</span></div>
+                <div class="list-btn" onclick="alert('Juma 15:00 da')"><span>Zakovat Natijalari</span> <span>🏆</span></div>
             </div>
         </div>
 
         <div id="sec-extra" class="section">
             <div class="card" style="border-top: 4px solid var(--blue);">
-                <h4 class="card-title">🤖 AI Yordamchi (Lotin/Kril)</h4>
+                <h4 class="card-title">🤖 AI Yordamchi</h4>
                 <div id="chat-container">
                     <div id="chat-window"><div class="msg ai-msg">Assalomu alaykum! Maktab haqida so'rang.</div></div>
                     <div style="display:flex; gap:8px;">
@@ -86,10 +86,9 @@
                 </div>
             </div>
             <div class="card">
-                <h4 class="card-title">🌐 Aloqa ва Мурожаат</h4>
+                <h4 class="card-title">🌐 Aloqa</h4>
                 <a href="tel:+998997712288" class="list-btn" style="background:#28a745; color:white; border:none; padding:15px;"><span>📞 +998 99 771 22 88</span><span>📞</span></a>
                 <a href="https://t.me/K_Dilmurod" class="list-btn" style="background:#448aff; color:white; border:none; padding:15px;"><span>📩 Shaxsiy Murojaat</span><span>➡️</span></a>
-                <a href="https://t.me/Ibn_sino_IM_Jizzax" class="list-btn" style="background:#0088cc; color:white; border:none; padding:15px;"><span>🔵 Telegram Kanal</span><span>➡️</span></a>
             </div>
         </div>
     </div>
@@ -118,49 +117,47 @@
         return t.split('').map(c => k[c] || c).join('');
     };
 
-    // BARCHA SINF MA'LUMOTLARI (HAR BIRIDAN 3 TADAN NAMUNA)
     const studentsData = [
-       // 6-SINF TO'LIQ BAZASI
-{n: "Abdukarimova Mubina", s: "6-a", c1: 32.5, o1: "6-o'rin", c2: 19.4, o2: "17-o'rin"},
-{n: "Abdumannonov Muhammadali", s: "6-a", c1: 30.4, o1: "15-o'rin", c2: 24.8, o2: "11-o'rin"},
-{n: "Alimova Rayxona", s: "6-a", c1: 33.6, o1: "14-o'rin", c2: 23.2, o2: "14-o'rin"},
-{n: "Baxtiyorov Behruz", s: "6-a", c1: 32.5, o1: "13-o'rin", c2: 25.6, o2: "10-o'rin"},
-{n: "Erkinov Eldor", s: "6-a", c1: 33.6, o1: "12-o'rin", c2: 26.4, o2: "8-o'rin"},
-{n: "G'aybullayeva Odina", s: "6-a", c1: 34.4, o1: "8-o'rin", c2: 24.8, o2: "12-o'rin"},
-{n: "Hamidullayev Kamronmirzo", s: "6-a", c1: 34.4, o1: "9-o'rin", c2: 32.8, o2: "7-o'rin"},
-{n: "Ismatullayeva Mohlaroyim", s: "6-a", c1: 34.4, o1: "10-o'rin", c2: 25.6, o2: "9-o'rin"},
-{n: "Mamatqulov Islom", s: "6-a", c1: 33.6, o1: "11-o'rin", c2: 24.8, o2: "13-o'rin"},
-{n: "Miraxmatov Mirabbos", s: "6-a", c1: 40, o1: "2-o'rin", c2: 36.8, o2: "3-o'rin"},
-{n: "Nuriddinov Nurmuhammad", s: "6-a", c1: 40, o1: "1-o'rin", c2: 37.6, o2: "1-o'rin"},
-{n: "Omonov Xojiakbar", s: "6-a", c1: 36, o1: "5-o'rin", c2: 36.8, o2: "4-o'rin"},
-{n: "Sa`dulloyev Durbek", s: "6-a", c1: 40, o1: "7-o'rin", c2: 35.2, o2: "5-o'rin"},
-{n: "Shadiyarov Mironshox", s: "6-a", c1: 32.4, o1: "16-o'rin", c2: 30.4, o2: "16-o'rin"},
-{n: "Shavkatov Behruz", s: "6-a", c1: 30.4, o1: "17-o'rin", c2: 35.2, o2: "6-o'rin"},
+        // 6-A SINF
+        {n: "Abdukarimova Mubina", s: "6-a", c1: 32.5, o1: "6-o'rin", c2: 19.4, o2: "17-o'rin"},
+        {n: "Abdumannonov Muhammadali", s: "6-a", c1: 30.4, o1: "15-o'rin", c2: 24.8, o2: "11-o'rin"},
+        {n: "Alimova Rayxona", s: "6-a", c1: 33.6, o1: "14-o'rin", c2: 23.2, o2: "14-o'rin"},
+        {n: "Baxtiyorov Behruz", s: "6-a", c1: 32.5, o1: "13-o'rin", c2: 25.6, o2: "10-o'rin"},
+        {n: "Erkinov Eldor", s: "6-a", c1: 33.6, o1: "12-o'rin", c2: 26.4, o2: "8-o'rin"},
+        {n: "G'aybullayeva Odina", s: "6-a", c1: 34.4, o1: "8-o'rin", c2: 24.8, o2: "12-o'rin"},
+        {n: "Hamidullayev Kamronmirzo", s: "6-a", c1: 34.4, o1: "9-o'rin", c2: 32.8, o2: "7-o'rin"},
+        {n: "Ismatullayeva Mohlaroyim", s: "6-a", c1: 34.4, o1: "10-o'rin", c2: 25.6, o2: "9-o'rin"},
+        {n: "Mamatqulov Islom", s: "6-a", c1: 33.6, o1: "11-o'rin", c2: 24.8, o2: "13-o'rin"},
+        {n: "Miraxmatov Mirabbos", s: "6-a", c1: 40, o1: "2-o'rin", c2: 36.8, o2: "3-o'rin"},
+        {n: "Nuriddinov Nurmuhammad", s: "6-a", c1: 40, o1: "1-o'rin", c2: 37.6, o2: "1-o'rin"},
+        {n: "Omonov Xojiakbar", s: "6-a", c1: 36, o1: "5-o'rin", c2: 36.8, o2: "4-o'rin"},
+        {n: "Sa`dulloyev Durbek", s: "6-a", c1: 40, o1: "7-o'rin", c2: 35.2, o2: "5-o'rin"},
+        {n: "Shadiyarov Mironshox", s: "6-a", c1: 32.4, o1: "16-o'rin", c2: 30.4, o2: "16-o'rin"},
+        {n: "Shavkatov Behruz", s: "6-a", c1: 30.4, o1: "17-o'rin", c2: 35.2, o2: "6-o'rin"},
+        // 7-A SINF
+        {n: "Abdukarimov Akbarjon", s: "7-a", c1: 32, o1: "8-o'rin", c2: 32.5, o2: "15-o'rin"},
+        {n: "Aliboev Mirziyo", s: "7-a", c1: 31, o1: "10-o'rin", c2: 30.8, o2: "11-o'rin"},
+        {n: "Amirqulov Jasurbek", s: "7-a", c1: 29.5, o1: "11-o'rin", c2: 24.2, o2: "22-o'rin"},
+        {n: "Asatullayeva Farangiz", s: "7-a", c1: 27, o1: "12-o'rin", c2: 30.8, o2: "11-o'rin"},
+        {n: "Berdiyorov Farruxbek", s: "7-a", c1: 32, o1: "8-o'rin", c2: 28.5, o2: "16-o'rin"},
+        {n: "Bo'riyeva Rayxona", s: "7-a", c1: 40, o1: "1-o'rin", c2: 37.6, o2: "2-o'rin"},
+        {n: "Eshonqulov Samandar", s: "7-a", c1: 34.5, o1: "4-o'rin", c2: 35.2, o2: "5-o'rin"},
+        {n: "Iskandarov O'ktambek", s: "7-a", c1: 40, o1: "2-o'rin", c2: 37.6, o2: "1-o'rin"},
+        {n: "Ismoilov Abdulaziz", s: "7-a", c1: 31, o1: "10-o'rin", c2: 33.3, o2: "9-o'rin"},
+        {n: "Ismoilov Islom", s: "7-a", c1: 36, o1: "3-o'rin", c2: 32.5, o2: "10-o'rin"},
+        {n: "Isomiddinov Islomjon", s: "7-a", c1: 34.5, o1: "4-o'rin", c2: 35.2, o2: "3-o'rin"},
+        {n: "Karimova Marjona", s: "7-a", c1: 34.5, o1: "4-o'rin", c2: 35.2, o2: "4-o'rin"},
+        {n: "Normatova Mohlaroy", s: "7-a", c1: 31.4, o1: "7-o'rin", c2: 26.6, o2: "18-o'rin"},
+        {n: "Nuraliyeva Sevinch", s: "7-a", c1: 33, o1: "6-o'rin", c2: 28.4, o2: "17-o'rin"},
+        {n: "Sayfullaev Anvarjon", s: "7-a", c1: 36, o1: "13-o'rin", c2: 30.8, o2: "11-o'rin"},
+        {n: "Sayfullaev Javoxir", s: "7-a", c1: 37.2, o1: "14-o'rin", c2: 25.8, o2: "21-o'rin"},
+        {n: "Shavkatova Madinabegim", s: "7-a", c1: 38, o1: "9-o'rin", c2: 35.2, o2: "7-o'rin"}
     ];
 
-    // 7-A SINF TO'LIQ BAZASI
-{n: "Abdukarimov Akbarjon", s: "7-a", c1: 32, o1: "8-o'rin", c2: 32.5, o2: "15-o'rin"},
-{n: "Aliboev Mirziyo", s: "7-a", c1: 31, o1: "10-o'rin", c2: 30.8, o2: "11-o'rin"},
-{n: "Amirqulov Jasurbek", s: "7-a", c1: 29.5, o1: "11-o'rin", c2: 24.2, o2: "22-o'rin"},
-{n: "Asatullayeva Farangiz", s: "7-a", c1: 27, o1: "12-o'rin", c2: 30.8, o2: "11-o'rin"},
-{n: "Berdiyorov Farruxbek", s: "7-a", c1: 32, o1: "8-o'rin", c2: 28.5, o2: "16-o'rin"},
-{n: "Bo'riyeva Rayxona", s: "7-a", c1: 40, o1: "1-o'rin", c2: 37.6, o2: "2-o'rin"},
-{n: "Eshonqulov Samandar", s: "7-a", c1: 34.5, o1: "4-o'rin", c2: 35.2, o2: "5-o'rin"},
-{n: "Iskandarov O'ktambek", s: "7-a", c1: 40, o1: "2-o'rin", c2: 37.6, o2: "1-o'rin"},
-{n: "Ismoilov Abdulaziz", s: "7-a", c1: 31, o1: "10-o'rin", c2: 33.3, o2: "9-o'rin"},
-{n: "Ismoilov Islom", s: "7-a", c1: 36, o1: "3-o'rin", c2: 32.5, o2: "10-o'rin"},
-{n: "Isomiddinov Islomjon", s: "7-a", c1: 34.5, o1: "4-o'rin", c2: 35.2, o2: "3-o'rin"},
-{n: "Karimova Marjona", s: "7-a", c1: 34.5, o1: "4-o'rin", c2: 35.2, o2: "4-o'rin"},
-{n: "Normatova Mohlaroy", s: "7-a", c1: 31.4, o1: "7-o'rin", c2: 26.6, o2: "18-o'rin"},
-{n: "Nuraliyeva Sevinch", s: "7-a", c1: 33, o1: "6-o'rin", c2: 28.4, o2: "17-o'rin"},
-{n: "Sayfullaev Anvarjon", s: "7-a", c1: 36, o1: "13-o'rin", c2: 30.8, o2: "11-o'rin"},
-{n: "Sayfullaev Javoxir", s: "7-a", c1: 37.2, o1: "14-o'rin", c2: 25.8, o2: "21-o'rin"},
-{n: "Shavkatova Madinabegim", s: "7-a", c1: 38, o1: "9-o'rin", c2: 35.2, o2: "7-o'rin"},
     const aiKnowledge = [
         {keys:["direktor","rahbar","dilmurod"], ans:"Maktab direktori: Karimqulov Dilmurod Qurbonboyevich."},
-        {keys:["salom","assalom"], ans:"Vaalaykum assalom! Ibn Sino AI yordamchisiman. Sizga qanday yordam bera olaman?"},
-        {keys:["manzil","joylashuv"], ans:"Maktabimiz Jizzax shahrida joylashgan."},
-        {keys:["zakovat"], ans:"Zakovat o'yinlari har juma 15:00 da o'tkaziladi."}
+        {keys:["salom","assalom"], ans:"Vaalaykum assalom! Ibn Sino AI yordamchisiman."},
+        {keys:["manzil"], ans:"Maktabimiz Jizzax shahrida жойлашган."}
     ];
 
     function searchS() {
@@ -188,9 +185,9 @@
         let win = document.getElementById('chat-window');
         win.innerHTML += `<div class="msg user-msg">${val}</div>`;
         input.value = '';
-        let response = "Hozircha bu savolga javobim yo'q. Bazani boyitmoqdamiz.";
+        let response = "Hozircha bu savolga javobim yo'q.";
         for(let item of aiKnowledge) { if(item.keys.some(k => text.includes(k))) { response = item.ans; break; } }
-        setTimeout(() => { win.innerHTML += `<div class="msg ai-msg">${response}</div>`; win.scrollTop = win.scrollHeight; }, 500);
+        setTimeout(() => { win.innerHTML += `<div class="msg ai-msg">${response}</div>`; win.scrollTop = win.scrollHeight; }, 400);
     }
 
     function st(sId, nId) {
@@ -203,10 +200,10 @@
     function renderStaff() {
         const staff = [
             {n:"Karimqulov Dilmurod Qurbonboyevich", p:"Maktab direktori", i:"Ish staji: 20 yil. Toifasi: Oliy.", img:"15.jpg"},
-            {n:"Jo'rayeva Feruza Ismatovna", p:"O'TIBDO'", i:"Ish staji: 31 yil. Toifasi: Ikkinchi.", img:"photo_2026-02-13_08-43-51.jpg"},
-            {n:"Ubaydullayev Sardorbek Safarbek o'g'li", p:"MMIBDO'", i:"Tug'ilgan yili: 1994. Toifasi: Oliy.", img:"photo_2026-02-13_08-43-51.jpg"},
-            {n:"Qosimov Avaz Donayevich", p:"XIBDO'", i:"Mutaxassisligi: Mexanik injener. Ish staji: 33 yil.", img:"photo_2026-02-13_08-43-51.jpg"},
-            {n:"Ahmadov Ijod Narziqulovich", p:"Targ'ibotchi", i:"Ish staji: 16 yil. Milliy g'oya mutaxassisi.", img:"photo_2026-02-13_08-43-51.jpg"}
+            {n:"Jo'rayeva Feruza Ismatovna", p:"O'TIBDO'", i:"Ish staji: 31 yil.", img:"photo_2026-02-13_08-43-51.jpg"},
+            {n:"Ubaydullayev Sardorbek", p:"MMIBDO'", i:"Tug'ilgan yili: 1994.", img:"photo_2026-02-13_08-43-51.jpg"},
+            {n:"Qosimov Avaz", p:"XIBDO'", i:"Staji: 33 yil.", img:"photo_2026-02-13_08-43-51.jpg"},
+            {n:"Ahmadov Ijod", p:"Targ'ibotchi", i:"Staji: 16 yil.", img:"photo_2026-02-13_08-43-51.jpg"}
         ];
         const list = document.getElementById('staff-list');
         list.innerHTML = '';
