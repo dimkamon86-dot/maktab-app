@@ -11,23 +11,28 @@
         .app-container { width: 100%; max-width: 500px; min-height: 100vh; position: relative; }
         .header { background: var(--blue); color: white; padding: 20px 10px; text-align: center; border-bottom: 4px solid var(--gold); border-radius: 0 0 25px 25px; }
         .school-logo { width: 65px; height: 65px; border-radius: 50%; background: white; border: 2px solid var(--gold); }
-        .container { padding: 15px; }
+        .container { padding: 15px; width: 100%; box-sizing: border-box; }
         .section { display: none; }
         .active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .card { background: white; border-radius: 15px; padding: 18px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 15px; border: 1px solid #e1e8ed; }
         .card-title { color: var(--blue); margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #eee; padding-bottom: 8px; font-size: 16px; font-weight: bold; }
-        .list-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; text-decoration: none; color: #333; }
-        .t-icon { width: 45px; height: 45px; border-radius: 50%; background: #eee; overflow: hidden; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; }
+        .list-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; text-decoration: none; color: #333; font-size: 14px; }
+        .t-icon { width: 45px; height: 45px; border-radius: 50%; background: #eee; overflow: hidden; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .t-icon img { width: 100%; height: 100%; object-fit: cover; }
         .res-box { display:none; margin-top:15px; background:#fff; padding:15px; border-radius:12px; border: 1.5px solid var(--blue); }
         .grade-row { display: flex; justify-content: space-between; margin-top: 10px; text-align: center; }
         .grade-val { font-size: 18px; font-weight: bold; color: var(--blue); }
         .badge { background: #eef7ff; color: var(--blue); padding: 3px 6px; border-radius: 5px; font-size: 10px; font-weight: bold; }
+        #chat-window { height: 180px; overflow-y: auto; background: #f9f9f9; border-radius: 10px; padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; font-size: 13px; display: flex; flex-direction: column; gap: 8px; }
+        .msg { padding: 8px 12px; border-radius: 15px; max-width: 85%; }
+        .ai-msg { background: #e1f5fe; color: #01579b; align-self: flex-start; }
+        .user-msg { background: #e8f5e9; color: #2e7d32; align-self: flex-end; }
         .nav-bar { position: fixed; bottom: 0; width: 100%; max-width: 500px; background: white; display: flex; justify-content: space-around; padding: 10px 0 25px 0; border-top: 1px solid #ddd; z-index: 10000; box-shadow: 0 -3px 10px rgba(0,0,0,0.05); }
         .nav-item { text-align: center; flex: 1; color: #8e9aaf; font-size: 10px; cursor: pointer; }
         .nav-active { color: var(--blue); font-weight: bold; }
         .nav-icon { font-size: 22px; display: block; margin-bottom: 3px; }
-        input { width: 100%; padding: 12px; border-radius: 10px; border: 1.5px solid var(--blue); box-sizing: border-box; font-size: 15px; }
+        input { width: 100%; padding: 12px; border-radius: 10px; border: 1.5px solid var(--blue); box-sizing: border-box; font-size: 15px; outline: none; }
         .modal { display: none; position: fixed; z-index: 20000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
         .modal-content { background: white; margin: 15% auto; padding: 25px; border-radius: 30px; width: 80%; max-width: 350px; text-align: center; position: relative; }
     </style>
@@ -44,7 +49,7 @@
         <div id="sec-home" class="section active">
             <div class="card">
                 <h4 class="card-title"><span>🔍</span> O‘quvchi Tahlili</h4>
-                <input type="text" id="sInput" placeholder="Familiyani yozing..." oninput="searchS()">
+                <input type="text" id="sInput" placeholder="Familiyani yozing (Лотин/Крилл)..." oninput="searchS()">
                 <div id="sResult" class="res-box">
                     <b id="sn" style="font-size: 16px; color: var(--blue); display: block;"></b>
                     <span id="ss" style="color: var(--gold); font-size: 12px; font-weight: bold;"></span>
@@ -55,27 +60,37 @@
                     </div>
                 </div>
             </div>
-            <div class="card"><h4 class="card-title">📰 Yangiliklar</h4><p style="font-size:13px;">• Tizimga barcha sinflar (6-11) yukланди.</p></div>
+            <div class="card"><h4 class="card-title">📰 Yangiliklar</h4><p style="font-size:13px;">• Barcha 6-11 sinf natijalari tizimga yuklandi.</p></div>
         </div>
 
         <div id="sec-staff" class="section">
-            <div class="card"><h4 class="card-title">👨‍🏫 Rahbariyat</h4><div id="staff-list"></div></div>
+            <div class="card"><h4 class="card-title">👨‍🏫 Maktab Rahbariyati</h4><div id="staff-list"></div></div>
         </div>
 
         <div id="sec-edu" class="section">
             <div class="card">
-                <h4 class="card-title">📚 Ta'lim Bo'limi</h4>
-                <div class="list-btn" onclick="alert('Tez orada...')"><span>Imtihon Testlari</span> <span>📝</span></div>
-                <div class="list-btn" onclick="alert('Tez orada...')"><span>Zakovat Natijalari</span> <span>🏆</span></div>
-                <div class="list-btn" onclick="alert('Tez orada...')"><span>Video Darslar</span> <span>▶️</span></div>
+                <h4 class="card-title">📚 Ta'lim va Video</h4>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Biologiya Testlar</span> <span>📝</span></div>
+                <div class="list-btn" onclick="alert('Tez orada...')"><span>Kimyo Video darslar</span> <span>▶️</span></div>
+                <div class="list-btn" onclick="alert('Zakovat juma kuni 15:00 da')"><span>Zakovat Natijalari</span> <span>🏆</span></div>
             </div>
         </div>
 
         <div id="sec-extra" class="section">
+            <div class="card" style="border-top: 4px solid var(--blue);">
+                <h4 class="card-title">🤖 AI Yordamchi</h4>
+                <div id="chat-container">
+                    <div id="chat-window"><div class="msg ai-msg">Assalomu alaykum! Maktab haqida so'rang.</div></div>
+                    <div style="display:flex; gap:8px;">
+                        <input type="text" id="chatInput" placeholder="Savol..." style="padding:10px;">
+                        <button onclick="askAI()" style="background:var(--blue); color:white; border:none; border-radius:10px; padding:0 15px;">➡️</button>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <h4 class="card-title">🌐 Aloqa</h4>
-                <a href="tel:+998997712288" class="list-btn" style="background:#28a745; color:white;"><span>📞 +998 99 771 22 88</span></a>
-                <a href="https://t.me/Ibn_sino_IM_Jizzax" class="list-btn" style="background:#0088cc; color:white;"><span>🔵 Telegram Kanal</span></a>
+                <a href="tel:+998997712288" class="list-btn" style="background:#28a745; color:white; border:none;"><span>📞 +998 99 771 22 88</span></a>
+                <a href="https://t.me/Ibn_sino_IM_Jizzax" class="list-btn" style="background:#0088cc; color:white; border:none;"><span>🔵 Telegram Kanal</span></a>
             </div>
         </div>
     </div>
@@ -84,52 +99,54 @@
         <div class="modal-content">
             <span style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;" onclick="closeM()">&times;</span>
             <img id="modal-img" src="" style="width:100px; height:100px; border-radius:50%; border:3px solid var(--gold); margin-bottom:15px; object-fit:cover;">
-            <h3 id="mn" style="color:var(--blue); margin:0;"></h3>
-            <p id="mp" style="font-weight:bold; color:var(--gold); margin:5px 0;"></p>
-            <div id="minfo" style="font-size:12px; color:#444; text-align:left; border-top:1px solid #eee; padding-top:10px;"></div>
+            <h3 id="mn" style="color:var(--blue); margin:0; font-size:18px;"></h3>
+            <p id="mp" style="font-weight:bold; color:var(--gold); margin:5px 0; font-size:13px;"></p>
+            <div id="minfo" style="font-size:12px; color:#444; text-align:left; border-top:1px solid #eee; padding-top:10px; line-height: 1.5;"></div>
         </div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item nav-active" id="n1" onclick="st('sec-home', 'n1')"><span class="nav-icon">🏠</span>Tahlil</div>
+        <div class="nav-item nav-active" id="n1" onclick="st('sec-home', 'n1')"><span class="nav-icon">🏠</span>Asosiy</div>
         <div class="nav-item" id="n2" onclick="st('sec-staff', 'n2')"><span class="nav-icon">👨‍🏫</span>Ustozlar</div>
         <div class="nav-item" id="n3" onclick="st('sec-edu', 'n3')"><span class="nav-icon">📚</span>Ta'lim</div>
-        <div class="nav-item" id="n4" onclick="st('sec-extra', 'n4')"><span class="nav-icon">📞</span>Aloqa</div>
+        <div class="nav-item" id="n4" onclick="st('sec-extra', 'n4')"><span class="nav-icon">🤖</span>AI</div>
     </div>
 </div>
 
 <script>
+    // KRIL-LOTIN TRANSLITERATSIYASI
+    const translit = (text) => {
+        const kr = {'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'j','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'x','ц':'ts','ч':'ch','ш':'sh','ъ':'','ь':'','э':'e','ю':'yu','я':'ya','ў':'o\'','қ':'q','ғ':'g\'','ҳ':'h','А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'Yo','Ж':'J','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'X','Ц':'Ts','Ч':'Ch','Ш':'Sh','Э':'E','Ю':'Yu','Я':'Ya','Ў':'O\'','Қ':'Q','Ғ':'G\'','Ҳ':'H'};
+        return text.split('').map(c => kr[c] || c).join('');
+    };
+
     // BARCHA SINF MA'LUMOTLARI (6-11)
     const studentsData = [
-        // 11-A (Namuna)
-        {n:"Abduqayumov Sarvar", s:"11-a", c1:32, o1:"6-o'rin", c2:20, o2:"19-o'rin"},
-        {n:"Begbutaev Xasan", s:"11-a", c1:32, o1:"7-o'rin", c2:35, o2:"10-o'rin"},
-        {n:"Urolov Suxrob", s:"11-a", c1:29.6, o1:"17-o'rin", c2:28.2, o2:"20-o'rin"},
-        // 10-A
-        {n:"Abdurasulov Abdukarim", s:"10-a", c1:18, o1:"20-o'rin", c2:29.5, o2:"12-o'rin"},
-        {n:"Sulaymanov Ozodbek", s:"10-a", c1:38, o1:"5-o'rin", c2:32.6, o2:"9-o'rin"},
-        // 9-A va 9-T
-        {n:"Abdumuradov Abdufayz", s:"9-a", c1:40, o1:"1-o'rin", c2:34.5, o2:"7-o'rin"},
-        {n:"Botirova Rayxona", s:"9-t", c1:34, o1:"7-o'rin", c2:26.4, o2:"16-o'rin"},
-        // 8-A, 8-B, 8-T
-        {n:"Abduganiev Asilbek", s:"8-a", c1:27, o1:"12-o'rin", c2:36.5, o2:"4-o'rin"},
-        {n:"Axmadjonova Asila", s:"8-b", c1:18, o1:"16-o'rin", c2:30.5, o2:"7-o'rin"},
-        {n:"O'taganova Marjona", s:"8-t", c1:40, o1:"2-o'rin", c2:28.2, o2:"13-o'rin"},
-        // 7-A, 7-B, 7-T
+        {n:"Abdukarimova Mubina", s:"6-a", c1:32.5, o1:"6-o'rin", c2:19.4, o2:"17-o'rin"},
+        {n:"Sa`dulloyev Durbek", s:"6-a", c1:40, o1:"7-o'rin", c2:35.2, o2:"5-o'rin"},
         {n:"Abdukarimov Akbarjon", s:"7-a", c1:32, o1:"8-o'rin", c2:32.5, o2:"15-o'rin"},
         {n:"Abduxalilova Visola", s:"7-b", c1:19, o1:"20-o'rin", c2:31, o2:"13-o'rin"},
-        {n:"Abduraximova Zarifa", s:"7-t", c1:28.8, o1:"15-o'rin", c2:28.8, o2:"9-o'rin"},
-        // 6-A
-        {n:"Abdukarimova Mubina", s:"6-a", c1:32.5, o1:"6-o'rin", c2:19.4, o2:"17-o'rin"},
-        {n:"Sa`dulloyev Durbek", s:"6-a", c1:40, o1:"7-o'rin", c2:35.2, o2:"5-o'rin"}
-        // ... qolgan barcha o'quvchilarni shu yerga qo'shib chiqing
+        {n:"Abduganiev Asilbek", s:"8-a", c1:27, o1:"12-o'rin", c2:36.5, o2:"4-o'rin"},
+        {n:"Axmadjonova Asila", s:"8-b", c1:18, o1:"16-o'rin", c2:30.5, o2:"7-o'rin"},
+        {n:"Abdumuradov Abdufayz", s:"9-a", c1:40, o1:"1-o'rin", c2:34.5, o2:"7-o'rin"},
+        {n:"Botirova Rayxona", s:"9-t", c1:34, o1:"7-o'rin", c2:26.4, o2:"16-o'rin"},
+        {n:"Abdurasulov Abdukarim", s:"10-a", c1:18, o1:"20-o'rin", c2:29.5, o2:"12-o'rin"},
+        {n:"Abduqayumov Sarvar", s:"11-a", c1:32, o1:"6-o'rin", c2:20, o2:"19-o'rin"},
+        {n:"Begbutaev Xasan", s:"11-a", c1:32, o1:"7-o'rin", c2:35, o2:"10-o'rin"},
+        {n:"Urolov Suxrob", s:"11-a", c1:29.6, o1:"17-o'rin", c2:28.2, o2:"20-o'rin"}
+    ];
+
+    const aiKnowledge = [
+        {keys:["direktor","rahbar","dilmurod"], ans:"Maktab direktori: Karimqulov Dilmurod Qurbonboyevich."},
+        {keys:["salom","assalom"], ans:"Vaalaykum assalom! Ibn Sino AI yordamchisiman."},
+        {keys:["zakovat"], ans:"Zakovat o'yinlari har juma 15:00 da o'tkaziladi."}
     ];
 
     function searchS() {
-        let v = document.getElementById('sInput').value.toLowerCase().trim();
+        let v = translit(document.getElementById('sInput').value.toLowerCase().trim());
         let res = document.getElementById('sResult');
         if(v.length > 2) {
-            let found = studentsData.find(s => s.n.toLowerCase().includes(v));
+            let found = studentsData.find(s => translit(s.n.toLowerCase()).includes(v));
             if(found) {
                 res.style.display = 'block';
                 document.getElementById('sn').innerText = found.n;
@@ -142,6 +159,18 @@
         } else { res.style.display = 'none'; }
     }
 
+    function askAI() {
+        let input = document.getElementById('chatInput');
+        let text = translit(input.value.toLowerCase().trim());
+        if(!text) return;
+        let win = document.getElementById('chat-window');
+        win.innerHTML += `<div class="msg user-msg">${input.value}</div>`;
+        input.value = '';
+        let response = "Hozircha bu savolga javobim yo'q. Bazani boyitmoqdamiz.";
+        for(let item of aiKnowledge) { if(item.keys.some(k => text.includes(k))) { response = item.ans; break; } }
+        setTimeout(() => { win.innerHTML += `<div class="msg ai-msg">${response}</div>`; win.scrollTop = win.scrollHeight; }, 500);
+    }
+
     function st(sId, nId) {
         document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
         document.getElementById(sId).style.display = 'block';
@@ -151,24 +180,30 @@
 
     function renderStaff() {
         const staff = [
-            {n:"Karimqulov Dilmurod", p:"Maktab direktori", i:"Ish staji: 20 yil. Toifasi: Oliy.", img:"15.jpg"},
-            {n:"Jo'rayeva Feruza", p:"O'TIBDO'", i:"Ish staji: 31 yil. Toifasi: Ikkinchi.", img:"photo_2026-02-13_08-43-51.jpg"}
+            {n:"Karimqulov Dilmurod Qurbonboyevich", p:"Maktab direktori", i:"Tug'ilgan yili: 19.12.1986. Yoshi: 39. Toifasi: Oliy. Ish staji: 20 yil.", img:"15.jpg"},
+            {n:"Jo'rayeva Feruza Ismatovna", p:"O'quv ishlari bo'yicha direktor o'rinbosari (O'TIBDO')", i:"Tug'ilgan yili: 1975. Toifasi: Ikkinchi. Ish staji: 31 yil.", img:"photo_2026-02-13_08-43-51.jpg"},
+            {n:"Ubaydullayev Sardorbek Safarbek o'g'li", p:"Ma'naviy-ma'rifiy ishlar bo'yicha o'rinbosar (MMIBDO')", i:"Tug'ilgan yili: 1994. Toifasi: Oliy. Ish staji: 6 yil.", img:"photo_2026-02-13_08-43-51.jpg"},
+            {n:"Qosimov Avaz Donayevich", p:"Xo'jalik ishlari bo'yicha o'rinbosar (XIBDO')", i:"Mutaxassisligi: Mexanik injener. Ish staji: 33 yil.", img:"photo_2026-02-13_08-43-51.jpg"},
+            {n:"Ahmadov Ijod Narziqulovich", p:"Ijodiy-madaniy masalalar бўйича тарғиботчи", i:"Mutaxassisligi: Milliy istiqlol g'oyasi va huquq. Ish staji: 16 yil.", img:"photo_2026-02-13_08-43-51.jpg"}
         ];
         const list = document.getElementById('staff-list');
         list.innerHTML = '';
         staff.forEach(s => {
-            list.innerHTML += `<div class="list-btn" onclick="openM('${s.n}','${s.p}','${s.i}','${s.img}')"><div style="display:flex;align-items:center;gap:10px;"><div class="t-icon"><img src="${s.img}"></div><div><b>${s.n}</b><br><small>${s.p}</small></div></div><span>➡️</span></div>`;
+            list.innerHTML += `<div class="list-btn" onclick="openM('${s.n}','${s.p}','${s.i}','${s.img}')"><div style="display:flex;align-items:center;gap:10px;"><div class="t-icon"><img src="${s.img}" onerror="this.src='photo_2026-02-13_08-43-51.jpg'"></div><div style="text-align:left;"><b>${s.n.split(' ')[0]} ${s.n.split(' ')[1]}</b><br><small style="color:#666;">${s.p}</small></div></div><span>➡️</span></div>`;
         });
     }
 
     function openM(n,p,i,r) {
-        document.getElementById('mn').innerText = n; document.getElementById('mp').innerText = p;
-        document.getElementById('minfo').innerText = i; document.getElementById('modal-img').src = r;
+        document.getElementById('mn').innerText = n;
+        document.getElementById('mp').innerText = p;
+        document.getElementById('minfo').innerText = i;
+        document.getElementById('modal-img').src = r;
         document.getElementById('tModal').style.display = 'block';
     }
     function closeM() { document.getElementById('tModal').style.display = 'none'; }
 
     renderStaff();
+    window.Telegram.WebApp.expand();
 </script>
 </body>
 </html>
